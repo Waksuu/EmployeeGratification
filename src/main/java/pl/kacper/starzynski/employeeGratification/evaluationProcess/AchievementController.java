@@ -1,4 +1,4 @@
-package pl.kacper.starzynski.employeeGratification.achievemenetCard;
+package pl.kacper.starzynski.employeeGratification.evaluationProcess;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

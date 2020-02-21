@@ -1,4 +1,4 @@
-package pl.kacper.starzynski.employeeGratification.achievemenetCard.domain;
+package pl.kacper.starzynski.employeeGratification.evaluationProcess.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package pl.kacper.starzynski.employeeGratification.achievemenetCard.domain;
+package pl.kacper.starzynski.employeeGratification.evaluationProcess.domain;
 
 import com.mongodb.annotations.Immutable;
 import lombok.*;
@@ -6,8 +6,7 @@ import lombok.*;
 @Immutable
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @Getter
-@ToString
 @EqualsAndHashCode
-public class AchievementCode {
+class AchievementCode {
     private final String code;
 }
