@@ -10,6 +10,6 @@ import java.util.UUID;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @Getter
 @Immutable
-class AchievementApplicationApplied {
+public class AchievementApplicationRemoved {
     private final UUID achievementApplicationId;
 }
