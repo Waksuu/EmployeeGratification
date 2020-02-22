@@ -11,11 +11,12 @@ class AchievementCard {
                                       ProposedOutcome proposedOutcome,
                                       AchievementConfigurationService achievementConfigurationService) {
 
+        //TODO: Should I create separate entity (AchievementApplication) to validate this rule?
         if (!achievementConfigurationService.isProposedOutcomeValid(achievementCode, proposedOutcome)) {
             throw new AchievementException();
         }
 
-        if (requestedMaintainableAchievementWasAlreadyRequested(achievementCode, achievementConfigurationService)) {
+        if (conflictOfInterest(achievementCode, achievementConfigurationService)) {
             throw new AchievementException();
         }
 
@@ -23,9 +24,12 @@ class AchievementCard {
         return new AchievementApplied(achievementCode);
     }
 
-    private boolean requestedMaintainableAchievementWasAlreadyRequested(AchievementCode achievementCode,
-                                                                        AchievementConfigurationService achievementConfigurationService) {
+    private boolean conflictOfInterest(AchievementCode achievementCode, AchievementConfigurationService achievementConfigurationService) {
+        return achievementCannotBeDuplicate(achievementCode, achievementConfigurationService) && requestedAchievements.contains(achievementCode);
+    }
+
+    private boolean achievementCannotBeDuplicate(AchievementCode achievementCode, AchievementConfigurationService achievementConfigurationService) {
         AchievementType achievementType = achievementConfigurationService.getAchievementType(achievementCode);
-        return achievementType.equals(AchievementType.MAINTAINABLE) && requestedAchievements.contains(achievementCode);
+        return achievementType.equals(AchievementType.MAINTAINABLE);
     }
 }
