@@ -6,7 +6,7 @@ import java.util.List;
 class AchievementCard {
     private final List<AchievementApplication> requestedApplications = new ArrayList<>();
 
-    public AchievementApplicationApplied addApplication(AchievementApplication application) {
+    AchievementApplicationApplied addApplication(AchievementApplication application) {
         if (conflictOfInterest(application)) {
             throw new AchievementException();
         }
@@ -16,7 +16,12 @@ class AchievementCard {
     }
 
     private boolean conflictOfInterest(AchievementApplication application) {
-        return requestedApplications.contains(application) && application.isMaintainableAchievement();
+        return achievementIsAlreadyRequested(application) && !application.canBeAppliedForMultipleTimes();
+    }
 
+    //TODO: Refactor
+    private boolean achievementIsAlreadyRequested(AchievementApplication application) {
+        return requestedApplications.stream().anyMatch(requestedApplication ->
+                requestedApplication.getAchievementCode().equals(application.getAchievementCode()));
     }
 }

@@ -9,13 +9,9 @@ import lombok.Getter;
 @Immutable
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Getter
 public class Achievement {
     @EqualsAndHashCode.Include
-    @Getter
     private final AchievementCode achievementCode;
     private final AchievementType achievementType;
-
-    boolean isMaintainableAchievement() {
-        return achievementType.equals(AchievementType.MAINTAINABLE);
-    }
 }

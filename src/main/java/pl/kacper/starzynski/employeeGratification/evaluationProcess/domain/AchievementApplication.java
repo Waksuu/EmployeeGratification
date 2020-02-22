@@ -8,19 +8,20 @@ import org.springframework.data.annotation.Id;
 
 import java.util.UUID;
 
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-class AchievementApplication {
-
+abstract class AchievementApplication {
     @Id
     @Getter
     @EqualsAndHashCode.Include
     //TODO: Think of some natural identity
     private final UUID id;
     private final Achievement achievement;
-    private final ProposedOutcome proposedOutcome;
+    private final String proposedOutcome;
 
-    public boolean isMaintainableAchievement() {
-        return achievement.isMaintainableAchievement();
+    abstract boolean canBeAppliedForMultipleTimes();
+
+    AchievementCode getAchievementCode() {
+        return achievement.getAchievementCode();
     }
 }

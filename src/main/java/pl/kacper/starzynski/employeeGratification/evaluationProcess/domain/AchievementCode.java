@@ -7,6 +7,6 @@ import lombok.*;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @Getter
 @EqualsAndHashCode
-class AchievementCode {
+public class AchievementCode {
     private final String code;
 }

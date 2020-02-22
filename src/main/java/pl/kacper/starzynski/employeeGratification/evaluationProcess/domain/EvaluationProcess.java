@@ -2,27 +2,35 @@ package pl.kacper.starzynski.employeeGratification.evaluationProcess.domain;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.UUID;
 
+@Document
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 //TODO: Is it good aggregate root?
 public class EvaluationProcess {
+    @Id
+    @EqualsAndHashCode.Include
+    private final UUID id;
     private final AchievementCard achievementCard;
     private final List<AchievementCode> availableAchievements;
-    private AchievementConfigurationService achievementConfigurationService;
 
-    public AchievementApplicationApplied applyForAchievement(AchievementCode achievementCode, ProposedOutcome proposedOutcome) {
-        if (achievementIsNotAvailableInEvaluationProcess(achievementCode)) {
+    public AchievementApplicationApplied applyForAchievement(AchievementApplication achievementApplication) {
+        if (achievementIsNotAvailableInEvaluationProcess(achievementApplication)) {
             throw new AchievementException();
         }
 
-        var application = AchievementApplicationFactory.create(achievementCode, proposedOutcome, achievementConfigurationService);
-        return achievementCard.addApplication(application);
+        return achievementCard.addApplication(achievementApplication);
     }
 
-    private boolean achievementIsNotAvailableInEvaluationProcess(AchievementCode achievementCode) {
-        return !availableAchievements.contains(achievementCode);
+    private boolean achievementIsNotAvailableInEvaluationProcess(AchievementApplication achievementApplication) {
+        //TODO: Maybe tell dont ask?
+        return !availableAchievements.contains(achievementApplication.getAchievementCode());
     }
 
 //    public AchievementApplicationRemoved removeAchievementApplication() {
