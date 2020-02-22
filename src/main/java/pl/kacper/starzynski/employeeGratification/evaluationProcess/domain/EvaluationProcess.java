@@ -10,14 +10,12 @@ public class EvaluationProcess {
     private final AchievementCard achievementCard;
     private final List<AchievementCode> availableAchievements;
 
-    public AchievementApplied applyForAchievement(AchievementCode achievementCode,
-                                                  ProposedOutcome proposedOutcome,
-                                                  AchievementConfigurationService achievementConfigurationService) {
+    public AchievementApplied applyForAchievement(AchievementCode achievementCode, ProposedOutcome proposedOutcome) {
         if (achievementIsNotAvailableInEvaluationProcess(achievementCode)) {
             throw new AchievementException();
         }
 
-        return achievementCard.addAchievement(achievementCode, proposedOutcome, achievementConfigurationService);
+        return achievementCard.addAchievement(achievementCode, proposedOutcome);
     }
 
     private boolean achievementIsNotAvailableInEvaluationProcess(AchievementCode achievementCode) {

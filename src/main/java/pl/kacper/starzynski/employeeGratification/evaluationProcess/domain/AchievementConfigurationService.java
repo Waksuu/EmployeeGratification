@@ -6,5 +6,5 @@ public interface AchievementConfigurationService {
 
     boolean isProposedOutcomeValid(AchievementCode achievementCode, ProposedOutcome proposedOutcome);
 
-    AchievementType getAchievementType(AchievementCode achievementCode);
+    boolean achievementCannotBeDuplicate(AchievementCode achievementCode);
 }
