@@ -9,17 +9,20 @@ import java.util.List;
 public class EvaluationProcess {
     private final AchievementCard achievementCard;
     private final List<AchievementCode> availableAchievements;
+    private final AchievementConfigurationService achievementConfigurationService;
 
-    public AchievementApplied applyForAchievement(AchievementCode achievementCode, ProposedOutcome proposedOutcome) {
+    public AchievementApplicationApplied applyForAchievement(AchievementCode achievementCode, ProposedOutcome proposedOutcome) {
         if (achievementIsNotAvailableInEvaluationProcess(achievementCode)) {
             throw new AchievementException();
         }
 
-        return achievementCard.addAchievement(achievementCode, proposedOutcome);
+        AchievementApplication application = AchievementApplicationFactory.create(achievementCode,
+                proposedOutcome,
+                achievementConfigurationService);
+        return achievementCard.addApplication(application);
     }
 
     private boolean achievementIsNotAvailableInEvaluationProcess(AchievementCode achievementCode) {
         return !availableAchievements.contains(achievementCode);
     }
-
 }

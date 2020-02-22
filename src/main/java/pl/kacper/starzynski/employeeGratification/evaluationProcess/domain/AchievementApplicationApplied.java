@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-class AchievementApplied {
+class AchievementApplicationApplied {
     private final AchievementCode achievementCode;
 }

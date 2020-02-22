@@ -8,26 +8,21 @@ import java.util.List;
 @AllArgsConstructor
 class AchievementCard {
 
-    private final List<AchievementCode> requestedAchievements = new ArrayList<>();
+    private final List<AchievementApplication> requestedApplications = new ArrayList<>();
     private final AchievementConfigurationService achievementConfigurationService;
 
-    AchievementApplied addAchievement(AchievementCode achievementCode, ProposedOutcome proposedOutcome) {
-
-        //TODO: Should I create separate entity (AchievementApplication) to validate this rule?
-        if (!achievementConfigurationService.isProposedOutcomeValid(achievementCode, proposedOutcome)) {
+    public AchievementApplicationApplied addApplication(AchievementApplication application) {
+        if (conflictOfInterest(application)) {
             throw new AchievementException();
         }
 
-        if (conflictOfInterest(achievementCode)) {
-            throw new AchievementException();
-        }
-
-        requestedAchievements.add(achievementCode);
-        return new AchievementApplied(achievementCode);
+        requestedApplications.add(application);
+        return new AchievementApplicationApplied(application.getAchievementCode());
     }
 
-    private boolean conflictOfInterest(AchievementCode achievementCode) {
-        return achievementConfigurationService.achievementCannotBeDuplicate(achievementCode) &&
-                requestedAchievements.contains(achievementCode);
+    private boolean conflictOfInterest(AchievementApplication application) {
+        return requestedApplications.contains(application) &&
+                achievementConfigurationService.applicationCannotBeDuplicate(application);
+
     }
 }

@@ -29,20 +29,19 @@ class EvaluationProcessTest {
 
     @BeforeEach
     void init() {
-        evaluationProcess = EvaluationProcessFactory.create(AchievementCardFactory.create(achievementConfigurationService), AVAILABLE_ACHIEVEMENTS);
+        evaluationProcess = EvaluationProcessFactory.create(AchievementCardFactory.create(achievementConfigurationService), AVAILABLE_ACHIEVEMENTS, achievementConfigurationService);
     }
 
     @Test
     void shouldAddAchievementApplication_achievementIsAvailableInCurrentEvaluation() {
         // GIVEN
         when(achievementConfigurationService.isProposedOutcomeValid(any(), any())).thenReturn(true);
-        when(achievementConfigurationService.achievementCannotBeDuplicate(any())).thenReturn(true);
 
         AchievementCode achievementCode = AchievementCodeFactory.create("MA001");
         ProposedOutcome proposedOutcome = ProposedOutcomeFactory.create();
 
         // WHEN
-        AchievementApplied event = evaluationProcess.applyForAchievement(achievementCode, proposedOutcome);
+        AchievementApplicationApplied event = evaluationProcess.applyForAchievement(achievementCode, proposedOutcome);
 
         // THEN
         assertEquals(achievementCode, event.getAchievementCode());
@@ -64,7 +63,7 @@ class EvaluationProcessTest {
     void shouldThrowWhenAddingAchievementApplication_sameMaintainableAchievementIsAlreadyAdded() {
         // GIVEN
         when(achievementConfigurationService.isProposedOutcomeValid(any(), any())).thenReturn(true);
-        when(achievementConfigurationService.achievementCannotBeDuplicate(any())).thenReturn(true);
+        when(achievementConfigurationService.applicationCannotBeDuplicate(any())).thenReturn(true);
 
         AchievementCode firstCode = AchievementCodeFactory.create("MA001");
         ProposedOutcome firstProposedOutcome = ProposedOutcomeFactory.create();
@@ -83,7 +82,6 @@ class EvaluationProcessTest {
     void shouldAddAchievementApplication_twoDifferentAchievements() {
         // GIVEN
         when(achievementConfigurationService.isProposedOutcomeValid(any(), any())).thenReturn(true);
-        when(achievementConfigurationService.achievementCannotBeDuplicate(any())).thenReturn(true);
 
         AchievementCode firstCode = AchievementCodeFactory.create("MA001");
         ProposedOutcome firstProposedOutcome = ProposedOutcomeFactory.create();
@@ -92,8 +90,8 @@ class EvaluationProcessTest {
         ProposedOutcome secondProposedOutcome = ProposedOutcomeFactory.create();
 
         // WHEN
-        AchievementApplied firstEvent = evaluationProcess.applyForAchievement(firstCode, firstProposedOutcome);
-        AchievementApplied secondEvent = evaluationProcess.applyForAchievement(secondCode, secondProposedOutcome);
+        AchievementApplicationApplied firstEvent = evaluationProcess.applyForAchievement(firstCode, firstProposedOutcome);
+        AchievementApplicationApplied secondEvent = evaluationProcess.applyForAchievement(secondCode, secondProposedOutcome);
 
         // THEN
         assertEquals(firstCode, firstEvent.getAchievementCode());
@@ -104,7 +102,7 @@ class EvaluationProcessTest {
     void shouldAddAchievementApplication_twoSameRepeatableAchievements() {
         // GIVEN
         when(achievementConfigurationService.isProposedOutcomeValid(any(), any())).thenReturn(true);
-        when(achievementConfigurationService.achievementCannotBeDuplicate(any())).thenReturn(false);
+        when(achievementConfigurationService.applicationCannotBeDuplicate(any())).thenReturn(false);
 
         AchievementCode firstCode = AchievementCodeFactory.create("RA001");
         ProposedOutcome firstProposedOutcome = ProposedOutcomeFactory.create();
@@ -113,8 +111,8 @@ class EvaluationProcessTest {
         ProposedOutcome secondProposedOutcome = ProposedOutcomeFactory.create();
 
         // WHEN
-        AchievementApplied firstEvent = evaluationProcess.applyForAchievement(firstCode, firstProposedOutcome);
-        AchievementApplied secondEvent = evaluationProcess.applyForAchievement(secondCode, secondProposedOutcome);
+        AchievementApplicationApplied firstEvent = evaluationProcess.applyForAchievement(firstCode, firstProposedOutcome);
+        AchievementApplicationApplied secondEvent = evaluationProcess.applyForAchievement(secondCode, secondProposedOutcome);
 
         // THEN
         assertEquals(firstCode, firstEvent.getAchievementCode());
