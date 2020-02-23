@@ -17,4 +17,8 @@ public class Achievement {
     @EqualsAndHashCode.Include
     private final AchievementCode achievementCode;
     private final AchievementType achievementType;
+
+    boolean equalsByCode(AchievementCode code) {
+        return achievementCode.equals(code);
+    }
 }

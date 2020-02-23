@@ -8,21 +8,33 @@ public class AchievementApplicationFactory {
         //TODO: Fix me I am ugly
         switch (achievement.getAchievementType()) {
             case MAINTAINABLE:
-                if (!achievementConfigurationService.isProposedOutcomeValid(achievement.getAchievementCode(), proposedOutcome)) {
-                    throw new AchievementException();
-                }
+                validateProposedOutcomeAsString(achievement, proposedOutcome, achievementConfigurationService);
                 return new MaintainableAchievementApplication(id, achievement, proposedOutcome);
             case REPEATABLE:
-                Integer.parseInt(proposedOutcome);
+                validateProposedOutcomeAsInt(proposedOutcome);
                 return new RepeatableAchievementApplication(id, achievement, proposedOutcome);
             case REPEATABLE_PARTIAL:
-                float numericOutcome = Float.parseFloat(proposedOutcome);
-                if (numericOutcome > 1 || numericOutcome < 0) {
-                    throw new AchievementException();
-                }
+                validateProposedOutcomeAsFloat(proposedOutcome);
                 return new PartialRepeatableAchievementApplication(id, achievement, proposedOutcome);
             default:
                 throw new IllegalStateException("Unexpected value: " + achievement.getAchievementType());
+        }
+    }
+
+    private static void validateProposedOutcomeAsString(Achievement achievement, String proposedOutcome, AchievementConfigurationService achievementConfigurationService) {
+        if (!achievementConfigurationService.isProposedOutcomeValid(achievement.getAchievementCode(), proposedOutcome)) {
+            throw new AchievementException();
+        }
+    }
+
+    private static void validateProposedOutcomeAsInt(String proposedOutcome) {
+        Integer.parseInt(proposedOutcome);
+    }
+
+    private static void validateProposedOutcomeAsFloat(String proposedOutcome) {
+        float numericOutcome = Float.parseFloat(proposedOutcome);
+        if (numericOutcome > 1 || numericOutcome < 0) {
+            throw new AchievementException();
         }
     }
 }

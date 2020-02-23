@@ -7,7 +7,7 @@ import pl.kacper.starzynski.employeeGratification.evaluationProcess.domain.Achie
 @Service
 public class AchievementConfigurationServiceImpl implements AchievementConfigurationService {
 
-    //TODO: Implement me, maybe api call to external service?
+    //TODO: Implement me, maybe api call to external service? or business analyst sending a pigeon
     @Override
     public boolean isProposedOutcomeValid(AchievementCode achievementCode, String proposedOutcome) {
         return true;

@@ -13,6 +13,7 @@ import java.util.List;
 public class EvaluationProcess {
     @Id
     @EqualsAndHashCode.Include
+    //TODO: Think of some natural identity
     private final Long id;
     private final AchievementCard achievementCard;
     private final List<AchievementCode> availableAchievements;
