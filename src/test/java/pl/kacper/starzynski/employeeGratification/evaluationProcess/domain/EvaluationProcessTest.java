@@ -34,7 +34,7 @@ class EvaluationProcessTest {
 
     @BeforeEach
     void init() {
-        evaluationProcess = EvaluationProcessFactory.create(UUID.randomUUID(),
+        evaluationProcess = EvaluationProcessFactory.create(1L,
                 AchievementCardFactory.create(),
                 AVAILABLE_ACHIEVEMENTS);
         lenient().when(achievementConfigurationService.isProposedOutcomeValid(any(), any())).thenReturn(true);

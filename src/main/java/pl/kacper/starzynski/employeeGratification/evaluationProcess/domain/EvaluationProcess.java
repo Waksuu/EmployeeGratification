@@ -7,7 +7,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
-import java.util.UUID;
 
 @Document
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -16,7 +15,7 @@ import java.util.UUID;
 public class EvaluationProcess {
     @Id
     @EqualsAndHashCode.Include
-    private final UUID id;
+    private final Long id;
     private final AchievementCard achievementCard;
     private final List<AchievementCode> availableAchievements;
 

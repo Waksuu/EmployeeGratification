@@ -16,9 +16,9 @@ public class EvaluationProcessService {
     private final AchievementConfigurationService achievementConfigurationService;
 
     @Transactional
-    public void applyForAchievement(AchievementApplicationDTO achievementApplicationDTO) {
+    public void applyForAchievement(long evaluationProcessId, AchievementApplicationDTO achievementApplicationDTO) {
         //TODO: Work with optional, maybe?
-        var achievement = achievementRepository.findById(achievementApplicationDTO.getAchievementCode())
+        var achievement = achievementRepository.findById(AchievementCodeFactory.create(achievementApplicationDTO.getAchievementCode()))
                 .orElseThrow(AchievementException::new);
 
         var application = AchievementApplicationFactory.create(UUID.randomUUID(),
@@ -26,7 +26,7 @@ public class EvaluationProcessService {
                 achievementApplicationDTO.getProposedOutcome(),
                 achievementConfigurationService);
 
-        var evaluationProcess = evaluationProcessRepository.findById(achievementApplicationDTO.getEvaluationProcessId())
+        var evaluationProcess = evaluationProcessRepository.findById(evaluationProcessId)
                 .orElseThrow(AchievementException::new);
 
         evaluationProcess.applyForAchievement(application);

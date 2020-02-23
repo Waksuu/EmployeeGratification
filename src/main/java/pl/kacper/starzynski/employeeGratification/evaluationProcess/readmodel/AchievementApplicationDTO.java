@@ -1,14 +1,12 @@
 package pl.kacper.starzynski.employeeGratification.evaluationProcess.readmodel;
 
-import lombok.Data;
-import pl.kacper.starzynski.employeeGratification.evaluationProcess.domain.AchievementCode;
+import lombok.*;
 
-import java.util.UUID;
-
-@Data
+@Getter
+@RequiredArgsConstructor
+@Setter
 public class AchievementApplicationDTO {
-    private final UUID evaluationProcessId;
-    private final AchievementCode achievementCode;
+    private final String achievementCode;
     private final String proposedOutcome;
     private final String someJsonWithQuestionsAndAnswers;
 }

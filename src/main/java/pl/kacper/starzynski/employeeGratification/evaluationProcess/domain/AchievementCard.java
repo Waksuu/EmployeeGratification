@@ -1,10 +1,13 @@
 package pl.kacper.starzynski.employeeGratification.evaluationProcess.domain;
 
-import java.util.ArrayList;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+
 import java.util.List;
 
+@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 class AchievementCard {
-    private final List<AchievementApplication> requestedApplications = new ArrayList<>();
+    private final List<AchievementApplication> requestedApplications;
 
     AchievementApplicationApplied addApplication(AchievementApplication application) {
         if (conflictOfInterest(application)) {
