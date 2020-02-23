@@ -3,18 +3,15 @@ package pl.kacper.starzynski.employeeGratification.evaluationProcess.domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
+import java.util.function.UnaryOperator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
 
-//TODO: Refactor tests
 @ExtendWith(MockitoExtension.class)
 class EvaluationProcessTest {
     private static final List<AchievementCode> AVAILABLE_ACHIEVEMENTS = Arrays.asList(
@@ -23,49 +20,30 @@ class EvaluationProcessTest {
             AchievementCodeFactory.create("RA001"),
             AchievementCodeFactory.create("RA002")
     );
-    private static final String LOST = "LOST";
-    private static final String MAINTAINED = "MAINTAINED";
-    private static final UUID ACHIEVEMENT_APPLICATION_ID = UUID.randomUUID();
 
     private EvaluationProcess evaluationProcess;
 
-    @Mock
-    private AchievementConfigurationService achievementConfigurationService;
-
     @BeforeEach
     void init() {
-        evaluationProcess = EvaluationProcessFactory.create(1L,
-                AchievementCardFactory.create(),
-                AVAILABLE_ACHIEVEMENTS);
-        lenient().when(achievementConfigurationService.isProposedOutcomeValid(any(), any())).thenReturn(true);
+        evaluationProcess = EvaluationProcessFactory.create(1L, AchievementCardFactory.create(), AVAILABLE_ACHIEVEMENTS);
     }
 
     @Test
     void shouldAddAchievementApplication_achievementIsAvailableInCurrentEvaluation() {
         // GIVEN
-        var achievementCode = AchievementCodeFactory.create("MA001");
-        var achievement = AchievementFactory.create(achievementCode, AchievementType.MAINTAINABLE);
-        var application = AchievementApplicationFactory.create(ACHIEVEMENT_APPLICATION_ID,
-                achievement,
-                LOST,
-                achievementConfigurationService);
+        var application = AchievementApplicationBuilder.createAchievementApplication(UnaryOperator.identity());
 
         // WHEN
         var event = evaluationProcess.applyForAchievement(application);
 
         // THEN
-        assertEquals(ACHIEVEMENT_APPLICATION_ID, event.getAchievementApplicationId());
+        assertEquals(application.getId(), event.getAchievementApplicationId());
     }
 
     @Test
     void shouldThrowWhenAddingAchievementApplication_achievementIsNotAvailableInCurrentEvaluation() {
         // GIVEN
-        var achievementCode = AchievementCodeFactory.create("MA003");
-        var achievement = AchievementFactory.create(achievementCode, AchievementType.MAINTAINABLE);
-        var application = AchievementApplicationFactory.create(ACHIEVEMENT_APPLICATION_ID,
-                achievement,
-                LOST,
-                achievementConfigurationService);
+        var application = AchievementApplicationBuilder.createAchievementApplication(x -> x.achievementCode("MA003"));
 
         // WHEN & Exception
         assertThrows(AchievementException.class, () ->
@@ -76,18 +54,8 @@ class EvaluationProcessTest {
     @Test
     void shouldThrowWhenAddingAchievementApplication_sameMaintainableAchievementIsAlreadyAdded() {
         // GIVEN
-        var achievementCode = AchievementCodeFactory.create("MA001");
-        var achievement = AchievementFactory.create(achievementCode, AchievementType.MAINTAINABLE);
-
-        var firstApplication = AchievementApplicationFactory.create(ACHIEVEMENT_APPLICATION_ID,
-                achievement,
-                LOST,
-                achievementConfigurationService);
-
-        var secondApplication = AchievementApplicationFactory.create(UUID.randomUUID(),
-                achievement,
-                MAINTAINED,
-                achievementConfigurationService);
+        var firstApplication = AchievementApplicationBuilder.createAchievementApplication(UnaryOperator.identity());
+        var secondApplication = AchievementApplicationBuilder.createAchievementApplication(UnaryOperator.identity());
 
         // WHEN & Exception
         evaluationProcess.applyForAchievement(firstApplication);
@@ -97,52 +65,38 @@ class EvaluationProcessTest {
     @Test
     void shouldAddAchievementApplication_twoDifferentAchievements() {
         // GIVEN
-        var firstCode = AchievementCodeFactory.create("MA001");
-        var firstAchievement = AchievementFactory.create(firstCode, AchievementType.MAINTAINABLE);
-        var firstApplication = AchievementApplicationFactory.create(ACHIEVEMENT_APPLICATION_ID,
-                firstAchievement,
-                LOST,
-                achievementConfigurationService);
+        var firstApplication = AchievementApplicationBuilder.createAchievementApplication(UnaryOperator.identity());
+        var secondApplication = AchievementApplicationBuilder.createAchievementApplication(x -> x.achievementCode("MA002"));
 
-        var secondAchievementId = UUID.randomUUID();
-        var secondCode = AchievementCodeFactory.create("MA002");
-        var secondAchievement = AchievementFactory.create(secondCode, AchievementType.MAINTAINABLE);
-        var secondApplication = AchievementApplicationFactory.create(secondAchievementId,
-                secondAchievement,
-                MAINTAINED,
-                achievementConfigurationService);
         // WHEN
         var firstEvent = evaluationProcess.applyForAchievement(firstApplication);
         var secondEvent = evaluationProcess.applyForAchievement(secondApplication);
 
         // THEN
-        assertEquals(ACHIEVEMENT_APPLICATION_ID, firstEvent.getAchievementApplicationId());
-        assertEquals(secondAchievementId, secondEvent.getAchievementApplicationId());
+        assertEquals(firstApplication.getId(), firstEvent.getAchievementApplicationId());
+        assertEquals(secondApplication.getId(), secondEvent.getAchievementApplicationId());
     }
 
     @Test
     void shouldAddAchievementApplication_twoSameRepeatableAchievements() {
         // GIVEN
-        var achievementCode = AchievementCodeFactory.create("RA001");
-        var achievement = AchievementFactory.create(achievementCode, AchievementType.REPEATABLE);
-        var firstApplication = AchievementApplicationFactory.create(ACHIEVEMENT_APPLICATION_ID,
-                achievement,
-                "1",
-                achievementConfigurationService);
+        var firstApplication = AchievementApplicationBuilder.createAchievementApplication(x -> x
+                .achievementCode("RA001")
+                .achievementType(AchievementType.REPEATABLE)
+                .proposedOutcome("1"));
 
-        var secondAchievementId = UUID.randomUUID();
-        var secondApplication = AchievementApplicationFactory.create(secondAchievementId,
-                achievement,
-                "3",
-                achievementConfigurationService);
+        var secondApplication = AchievementApplicationBuilder.createAchievementApplication(x -> x
+                .achievementCode("RA001")
+                .achievementType(AchievementType.REPEATABLE)
+                .proposedOutcome("3"));
 
         // WHEN
         var firstEvent = evaluationProcess.applyForAchievement(firstApplication);
         var secondEvent = evaluationProcess.applyForAchievement(secondApplication);
 
         // THEN
-        assertEquals(ACHIEVEMENT_APPLICATION_ID, firstEvent.getAchievementApplicationId());
-        assertEquals(secondAchievementId, secondEvent.getAchievementApplicationId());
+        assertEquals(firstApplication.getId(), firstEvent.getAchievementApplicationId());
+        assertEquals(secondApplication.getId(), secondEvent.getAchievementApplicationId());
     }
 
 }
