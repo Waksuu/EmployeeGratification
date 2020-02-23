@@ -22,9 +22,8 @@ class AchievementCard {
         return achievementIsAlreadyRequested(application) && !application.canBeAppliedForMultipleTimes();
     }
 
-    //TODO: Refactor
     private boolean achievementIsAlreadyRequested(AchievementApplication application) {
         return requestedApplications.stream().anyMatch(requestedApplication ->
-                requestedApplication.getAchievementCode().equals(application.getAchievementCode()));
+                requestedApplication.areAchievementsEqual(application));
     }
 }

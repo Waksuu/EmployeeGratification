@@ -21,7 +21,12 @@ abstract class AchievementApplication {
 
     abstract boolean canBeAppliedForMultipleTimes();
 
-    AchievementCode getAchievementCode() {
-        return achievement.getAchievementCode();
+    boolean areAchievementsEqual(AchievementApplication application) {
+        return areAchievementsEqual(application.achievement.getAchievementCode());
+    }
+
+    //TODO: Maybe move it even further down (to achievement?)
+    boolean areAchievementsEqual(AchievementCode code) {
+        return achievement.getAchievementCode().equals(code);
     }
 }

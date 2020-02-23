@@ -26,11 +26,6 @@ public class EvaluationProcess {
     }
 
     private boolean achievementIsNotAvailableInEvaluationProcess(AchievementApplication achievementApplication) {
-        //TODO: Maybe tell dont ask?
-        return !availableAchievements.contains(achievementApplication.getAchievementCode());
+        return availableAchievements.stream().noneMatch(achievementApplication::areAchievementsEqual);
     }
-
-//    public AchievementApplicationRemoved removeAchievementApplication() {
-//        return achievementCard.removeApplication
-//    }
 }
