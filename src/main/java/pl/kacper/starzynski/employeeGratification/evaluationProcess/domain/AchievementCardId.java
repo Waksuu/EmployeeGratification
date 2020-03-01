@@ -1,12 +1,17 @@
 package pl.kacper.starzynski.employeeGratification.evaluationProcess.domain;
 
+import java.util.UUID;
+
 import com.mongodb.annotations.Immutable;
-import lombok.*;
+
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 @Immutable
 @AllArgsConstructor
 @Getter
 @EqualsAndHashCode
-public class AchievementCode {
-    private final String code;
+public class AchievementCardId {
+    private final UUID id;
 }

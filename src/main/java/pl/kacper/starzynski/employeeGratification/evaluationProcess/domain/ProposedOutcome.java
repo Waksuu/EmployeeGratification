@@ -1,12 +1,15 @@
 package pl.kacper.starzynski.employeeGratification.evaluationProcess.domain;
 
 import com.mongodb.annotations.Immutable;
-import lombok.*;
+
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 @Immutable
 @AllArgsConstructor
-@Getter
 @EqualsAndHashCode
-public class AchievementCode {
-    private final String code;
+@Getter
+public class ProposedOutcome {
+    private final String proposedOutcome;
 }

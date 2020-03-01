@@ -1,12 +1,14 @@
 package pl.kacper.starzynski.employeeGratification.evaluationProcess.readmodel;
 
+import java.io.Serializable;
+import java.util.List;
+
 import lombok.*;
 
 @Getter
-@RequiredArgsConstructor
-@Setter
-public class AchievementApplicationDTO {
+@AllArgsConstructor
+public class AchievementApplicationDTO implements Serializable {
     private final String achievementCode;
     private final String proposedOutcome;
-    private final String someJsonWithQuestionsAndAnswers;
+    private final List<AnswerDTO> answers;
 }

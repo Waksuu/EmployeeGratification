@@ -1,16 +1,16 @@
 package pl.kacper.starzynski.employeeGratification.evaluationProcess.domain;
 
+import java.util.UUID;
+
 import com.mongodb.annotations.Immutable;
-import lombok.AccessLevel;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.DomainEvent;
 
-import java.util.UUID;
-
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
-@Getter
 @Immutable
-class AchievementApplicationApplied extends DomainEvent {
-    private final UUID achievementApplicationId;
+@Getter
+@AllArgsConstructor
+public class AchievementCardMovedToPromoMeeting extends DomainEvent {
+    private final UUID id;
 }
