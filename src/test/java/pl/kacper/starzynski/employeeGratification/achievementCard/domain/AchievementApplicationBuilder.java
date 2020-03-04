@@ -11,7 +11,6 @@ import static org.mockito.Mockito.*;
 
 public class AchievementApplicationBuilder {
 
-    //TODO: Maybe implement more methods for specific applications?
     //TODO: Refactor
     static AchievementApplication createMaintainableAchievementApplication(
             UnaryOperator<AchievementApplicationFields.AchievementApplicationFieldsBuilder> overridingExpression) {
