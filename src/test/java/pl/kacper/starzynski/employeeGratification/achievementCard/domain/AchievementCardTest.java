@@ -1,16 +1,5 @@
 package pl.kacper.starzynski.employeeGratification.achievementCard.domain;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.when;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-import java.util.function.UnaryOperator;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,6 +8,17 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementApplicationId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.QuestionId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.QuestionnaireId;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+import java.util.function.UnaryOperator;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class AchievementCardTest {
@@ -59,7 +59,7 @@ class AchievementCardTest {
         var event = achievementCard.applyForAchievement(application, achievementConfigurationServiceMock);
 
         // THEN
-        assertEquals(application.getId().getId(), event.getAchievementApplicationId());
+        assertEquals(application.getId(), event.getAchievementApplicationId());
     }
 
     @Test
@@ -97,8 +97,8 @@ class AchievementCardTest {
         var secondEvent = achievementCard.applyForAchievement(secondApplication, achievementConfigurationServiceMock);
 
         // THEN
-        assertEquals(firstApplication.getId().getId(), firstEvent.getAchievementApplicationId());
-        assertEquals(secondApplication.getId().getId(), secondEvent.getAchievementApplicationId());
+        assertEquals(firstApplication.getId(), firstEvent.getAchievementApplicationId());
+        assertEquals(secondApplication.getId(), secondEvent.getAchievementApplicationId());
     }
 
     @Test
@@ -113,8 +113,8 @@ class AchievementCardTest {
         var secondEvent = achievementCard.applyForAchievement(secondApplication, achievementConfigurationServiceMock);
 
         // THEN
-        assertEquals(firstApplication.getId().getId(), firstEvent.getAchievementApplicationId());
-        assertEquals(secondApplication.getId().getId(), secondEvent.getAchievementApplicationId());
+        assertEquals(firstApplication.getId(), firstEvent.getAchievementApplicationId());
+        assertEquals(secondApplication.getId(), secondEvent.getAchievementApplicationId());
     }
 
     @Test
@@ -128,7 +128,7 @@ class AchievementCardTest {
         var event = achievementCard.removeAchievementApplication(achievementApplicationId);
 
         // THEN
-        assertEquals(achievementApplicationId.getId(), event.getAchievementApplicationId());
+        assertEquals(achievementApplicationId, event.getAchievementApplicationId());
     }
 
     @Test

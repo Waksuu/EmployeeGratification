@@ -1,7 +1,5 @@
 package pl.kacper.starzynski.employeeGratification.achievementCard.domain;
 
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationApplied;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationRemoved;
@@ -12,6 +10,8 @@ import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identit
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.ConfigId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.state.AchievementCardState;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.state.DraftAchievementCardState;
+
+import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
@@ -41,7 +41,7 @@ public class AchievementCard {
             }
 
             requestedApplications.add(application);
-            return new AchievementApplicationApplied(application.getId().getId());
+            return new AchievementApplicationApplied(application.getId());
         });
     }
 
@@ -63,7 +63,7 @@ public class AchievementCard {
             }
 
             requestedApplications.removeIf(application -> application.getId().equals(achievementApplicationId));
-            return new AchievementApplicationRemoved(achievementApplicationId.getId());
+            return new AchievementApplicationRemoved(achievementApplicationId);
         });
     }
 
