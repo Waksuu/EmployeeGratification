@@ -1,6 +1,7 @@
 package pl.kacper.starzynski.employeeGratification.achievementCard.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationApplied;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationRemoved;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.ProposedOutcomeUpdated;
@@ -20,6 +21,8 @@ public class AchievementCard {
     private final AchievementCardId id;
     private final List<AchievementApplication> requestedApplications;
     private final ConfigId configId;
+    //TODO: Add discriminator column
+    @Transient
     private AchievementCardState state;
 
     public AchievementCard(AchievementCardId id, List<AchievementApplication> requestedApplications, ConfigId configId) {
