@@ -6,13 +6,12 @@ import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identit
 import java.util.List;
 
 public class AchievementApplicationFactory {
-    public static AchievementApplication create(AchievementApplicationId id, AchievementCode achievementCode, String proposedOutcome,
+    public static AchievementApplication create(AchievementApplicationId id, AchievementCode achievementCode, ProposedOutcome proposedOutcome,
             List<QuestionnaireAnswer> answers, AchievementConfigurationService achievementConfigurationService) {
-        var outcome = new ProposedOutcome(proposedOutcome);
-        if (achievementConfigurationService.isProposedOutcomeInvalid(achievementCode, outcome)) {
+        if (achievementConfigurationService.isProposedOutcomeInvalid(achievementCode, proposedOutcome)) {
             throw new AchievementException();
         }
 
-        return new AchievementApplication(id, achievementCode, outcome, answers);
+        return new AchievementApplication(id, achievementCode, proposedOutcome, answers);
     }
 }

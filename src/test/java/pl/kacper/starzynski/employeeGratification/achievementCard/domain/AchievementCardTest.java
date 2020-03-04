@@ -27,15 +27,15 @@ class AchievementCardTest {
             new QuestionnaireAnswer(
                     new QuestionnaireId(UUID.randomUUID()),
                     new QuestionId(UUID.randomUUID()),
-                    "Yes"),
+                    new Answer("Yes")),
             new QuestionnaireAnswer(
                     new QuestionnaireId(UUID.randomUUID()),
                     new QuestionId(UUID.randomUUID()),
-                    "No"),
+                    new Answer("No")),
             new QuestionnaireAnswer(
                     new QuestionnaireId(UUID.randomUUID()),
                     new QuestionId(UUID.randomUUID()),
-                    "He is very promising employee")
+                    new Answer("He is very promising employee"))
     );
 
     private AchievementCard achievementCard;

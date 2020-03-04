@@ -68,10 +68,9 @@ public class AchievementApplicationBuilder {
     }
 
     private static AchievementApplication getAchievementApplication(AchievementApplicationFields overriddenApplication) {
-        var achievementCode = new AchievementCode(overriddenApplication.getAchievementCode());
         return AchievementApplicationFactory.create(overriddenApplication.getId(),
-                achievementCode,
-                overriddenApplication.getProposedOutcome(),
+                new AchievementCode(overriddenApplication.getAchievementCode()),
+                new ProposedOutcome(overriddenApplication.getProposedOutcome()),
                 overriddenApplication.getAnswers(),
                 overriddenApplication.getAchievementConfigurationService());
     }
