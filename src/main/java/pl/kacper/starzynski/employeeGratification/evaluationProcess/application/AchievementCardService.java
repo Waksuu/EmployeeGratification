@@ -62,6 +62,6 @@ public class AchievementCardService {
         var achievementCard = achievementCardRepository.findById(new AchievementCardId(achievementCardId))
                 .orElseThrow(AchievementException::new);
 
-        achievementCard.markAsReadyToPromoMeeting();
+        achievementCard.moveToPromotionMeeting();
     }
 }

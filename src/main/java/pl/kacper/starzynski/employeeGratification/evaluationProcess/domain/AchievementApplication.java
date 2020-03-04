@@ -7,7 +7,6 @@ import lombok.Getter;
 import org.springframework.data.annotation.Id;
 
 import java.util.List;
-import java.util.UUID;
 
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -25,6 +24,7 @@ class AchievementApplication {
         return application.achievementCode.equals(achievementCode);
     }
 
+    //TODO: Split
     AchievementApplicationUpdated updateAchievementApplication(ProposedOutcome proposedOutcome,
             List<Answer> answers, AchievementConfigurationService achievementConfigurationService) {
         if (achievementConfigurationService.isProposedOutcomeInvalid(achievementCode, proposedOutcome)) {
@@ -43,5 +43,9 @@ class AchievementApplication {
 
     boolean canBeAppliedForMultipleTimes(AchievementConfigurationService achievementConfigurationService) {
         return achievementConfigurationService.canBeAppliedForMultipleTimes(achievementCode);
+    }
+
+    boolean areAnswersFilled() {
+        return answers.stream().allMatch(Answer::isAnswerFilled);
     }
 }

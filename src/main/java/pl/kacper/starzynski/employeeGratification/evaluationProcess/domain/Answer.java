@@ -10,4 +10,8 @@ import lombok.EqualsAndHashCode;
 public class Answer {
     private final UUID questionId;
     private final String answer;
+
+    boolean isAnswerFilled() {
+        return !answer.isBlank();
+    }
 }
