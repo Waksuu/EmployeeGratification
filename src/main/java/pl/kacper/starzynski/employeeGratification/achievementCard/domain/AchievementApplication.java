@@ -30,9 +30,9 @@ class AchievementApplication {
         return application.achievementCode.equals(achievementCode);
     }
 
-    ProposedOutcomeUpdated updateProposedOutcome(ProposedOutcome proposedOutcome,
+    ProposedOutcomeUpdated updateProposedOutcome(ProposedOutcome proposedOutcome, AchievementConfigurationId configId,
             AchievementConfigurationService achievementConfigurationService) {
-        if (achievementConfigurationService.isProposedOutcomeInvalid(achievementCode, proposedOutcome)) {
+        if (achievementConfigurationService.isProposedOutcomeInvalid(achievementCode, proposedOutcome, configId)) {
             throw new AchievementException();
         }
 
@@ -51,8 +51,8 @@ class AchievementApplication {
         return achievementConfigurationService.isAchievementAvailableInEvaluationProcess(achievementCode, configId);
     }
 
-    boolean canBeAppliedForMultipleTimes(AchievementConfigurationService achievementConfigurationService) {
-        return achievementConfigurationService.canBeAppliedForMultipleTimes(achievementCode);
+    boolean canBeAppliedForMultipleTimes(AchievementConfigurationId configId, AchievementConfigurationService achievementConfigurationService) {
+        return achievementConfigurationService.canBeAppliedForMultipleTimes(achievementCode, configId);
     }
 
     boolean areAnswersFilled() {

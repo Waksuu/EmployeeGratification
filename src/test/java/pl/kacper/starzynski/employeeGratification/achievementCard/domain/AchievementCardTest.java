@@ -9,6 +9,7 @@ import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementApplicationId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.QuestionId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.QuestionnaireId;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
 import java.util.Arrays;
@@ -16,8 +17,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.UnaryOperator;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
@@ -56,13 +56,14 @@ class AchievementCardTest {
     @Test
     void shouldAddAchievementApplication_achievementIsAvailableInCurrentEvaluation() {
         // GIVEN
-        var application = AchievementApplicationBuilder.createMaintainableAchievementApplication(UnaryOperator.identity());
+        var achievementCode = new AchievementCode("MA001");
+        var outcome = new ProposedOutcome("LOST");
 
         // WHEN
-        var event = achievementCard.applyForAchievement(application, achievementConfigurationServiceMock);
+        var event = achievementCard.applyForAchievement(achievementCode, outcome, achievementConfigurationServiceMock);
 
         // THEN
-        assertApplicationIsAdded(application, event);
+        assertApplicationIsAdded(event);
     }
 
     @Test
@@ -204,8 +205,8 @@ class AchievementCardTest {
                 () -> achievementCard.updateQuestionnaireAnswers(new AchievementApplicationId(UUID.randomUUID()), ANSWERS));
     }
 
-    private void assertApplicationIsAdded(AchievementApplication application, AchievementApplicationApplied event) {
-        assertEquals(application.getId(), event.getAchievementApplicationId());
+    private void assertApplicationIsAdded(AchievementApplicationApplied event) {
+        assertNotNull(event.getAchievementApplicationId());
     }
 
     private void assertApplyingForApplicationFailed(AchievementApplication application) {

@@ -6,9 +6,10 @@ import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
 //TODO: Make it cachable
 public interface AchievementConfigurationService {
-    boolean isProposedOutcomeInvalid(AchievementCode achievementCode, ProposedOutcome proposedOutcome);
+    boolean isProposedOutcomeInvalid(AchievementCode achievementCode, ProposedOutcome proposedOutcome,
+            AchievementConfigurationId configId);
 
     boolean isAchievementAvailableInEvaluationProcess(AchievementCode achievementCode, AchievementConfigurationId configId);
 
-    boolean canBeAppliedForMultipleTimes(AchievementCode achievementCode);
+    boolean canBeAppliedForMultipleTimes(AchievementCode achievementCode, AchievementConfigurationId configId);
 }

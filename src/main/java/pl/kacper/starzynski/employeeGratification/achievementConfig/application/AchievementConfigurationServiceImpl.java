@@ -17,8 +17,11 @@ public class AchievementConfigurationServiceImpl implements AchievementConfigura
 
     //TODO: Implement me, maybe api call to external service? or business analyst sending a pigeon
     @Override
-    public boolean isProposedOutcomeInvalid(AchievementCode achievementCode, ProposedOutcome proposedOutcome) {
-        return false;
+    public boolean isProposedOutcomeInvalid(AchievementCode achievementCode, ProposedOutcome proposedOutcome,
+            AchievementConfigurationId configId) {
+        AchievementConfiguration configuration = achievementConfigurationRepository.findById(configId)
+                .orElseThrow(AchievementException::new);
+        return configuration.isProposedOutcomeInvalid(achievementCode, proposedOutcome);
     }
 
     @Override
@@ -29,7 +32,10 @@ public class AchievementConfigurationServiceImpl implements AchievementConfigura
     }
 
     @Override
-    public boolean canBeAppliedForMultipleTimes(AchievementCode achievementCode) {
-        return !achievementCode.getCode().contains("MA");
+    public boolean canBeAppliedForMultipleTimes(AchievementCode achievementCode, AchievementConfigurationId configId) {
+        AchievementConfiguration configuration = achievementConfigurationRepository.findById(configId)
+                .orElseThrow(AchievementException::new);
+        return configuration.canBeAppliedForMultipleTimes(achievementCode);
     }
+
 }

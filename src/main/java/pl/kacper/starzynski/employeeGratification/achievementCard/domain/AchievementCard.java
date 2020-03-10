@@ -9,10 +9,13 @@ import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identit
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementCardId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.state.AchievementCardState;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.state.DraftAchievementCardState;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementConfigurationId;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import static java.util.stream.Collectors.toList;
 
@@ -30,9 +33,16 @@ public class AchievementCard {
         this.state = new DraftAchievementCardState();
     }
 
-    public AchievementApplicationApplied applyForAchievement(AchievementApplication application,
+    public AchievementApplicationApplied applyForAchievement(AchievementCode achievementCode, ProposedOutcome proposedOutcome,
             AchievementConfigurationService achievementConfigurationService) {
         return state.applyForAchievement(() -> {
+            var application = AchievementApplicationFactory.create(new AchievementApplicationId(UUID.randomUUID()),
+                    achievementCode,
+                    proposedOutcome,
+                    Collections.emptyList(),
+                    configId,
+                    achievementConfigurationService);
+
             if (!application.isAchievementAvailableInEvaluationProcess(configId, achievementConfigurationService)) {
                 throw new AchievementException();
             }
@@ -49,7 +59,7 @@ public class AchievementCard {
     private boolean conflictOfInterest(AchievementApplication application,
             AchievementConfigurationService achievementConfigurationService) {
         return achievementIsAlreadyRequested(application) &&
-                !application.canBeAppliedForMultipleTimes(achievementConfigurationService);
+                !application.canBeAppliedForMultipleTimes(configId, achievementConfigurationService);
     }
 
     private boolean achievementIsAlreadyRequested(AchievementApplication application) {
@@ -76,7 +86,7 @@ public class AchievementCard {
             ProposedOutcome proposedOutcome, AchievementConfigurationService achievementConfigurationService) {
         return this.state.updateProposedOutcome(() -> {
             var application = getAchievementApplication(achievementApplicationId);
-            return application.updateProposedOutcome(proposedOutcome, achievementConfigurationService);
+            return application.updateProposedOutcome(proposedOutcome, configId, achievementConfigurationService);
         });
     }
 

@@ -12,7 +12,6 @@ import pl.kacper.starzynski.employeeGratification.achievementCard.readmodel.Achi
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,16 +25,11 @@ public class AchievementCardService {
     private final AchievementConfigurationService achievementConfigurationService;
 
     public void applyForAchievement(UUID achievementCardId, AchievementApplicationDTO dto) {
-        var application = AchievementApplicationFactory.create(new AchievementApplicationId(UUID.randomUUID()),
-                new AchievementCode(dto.getAchievementCode()),
-                new ProposedOutcome(dto.getProposedOutcome()),
-                Collections.emptyList(),
-                achievementConfigurationService);
-
         var achievementCard = achievementCardRepository.findById(new AchievementCardId(achievementCardId))
                 .orElseThrow(AchievementException::new);
 
-        achievementCard.applyForAchievement(application, achievementConfigurationService);
+        achievementCard.applyForAchievement(new AchievementCode(dto.getAchievementCode()),
+                new ProposedOutcome(dto.getProposedOutcome()), achievementConfigurationService);
         achievementCardRepository.save(achievementCard);
     }
 
