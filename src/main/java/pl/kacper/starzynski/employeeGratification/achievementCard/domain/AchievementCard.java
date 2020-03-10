@@ -1,16 +1,16 @@
 package pl.kacper.starzynski.employeeGratification.achievementCard.domain;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationApplied;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationRemoved;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.ProposedOutcomeUpdated;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.QuestionnaireAnswersUpdated;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementApplicationId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementCardId;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.ConfigId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.state.AchievementCardState;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.state.DraftAchievementCardState;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementConfigurationId;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
 import java.util.List;
 
@@ -20,12 +20,10 @@ public class AchievementCard {
     @Id
     private final AchievementCardId id;
     private final List<AchievementApplication> requestedApplications;
-    private final ConfigId configId;
-    //TODO: Add discriminator column
-    @Transient
+    private final AchievementConfigurationId configId;
     private AchievementCardState state;
 
-    public AchievementCard(AchievementCardId id, List<AchievementApplication> requestedApplications, ConfigId configId) {
+    public AchievementCard(AchievementCardId id, List<AchievementApplication> requestedApplications, AchievementConfigurationId configId) {
         this.id = id;
         this.requestedApplications = requestedApplications;
         this.configId = configId;
@@ -83,7 +81,7 @@ public class AchievementCard {
     }
 
     public QuestionnaireAnswersUpdated updateQuestionnaireAnswers(AchievementApplicationId achievementApplicationId,
-                List<QuestionnaireAnswer> answers) {
+            List<QuestionnaireAnswer> answers) {
         return this.state.updateQuestionnaireAnswers(() -> {
             var application = getAchievementApplication(achievementApplicationId);
             return application.updateAnswers(answers);

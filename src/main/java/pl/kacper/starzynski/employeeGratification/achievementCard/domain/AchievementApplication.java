@@ -8,8 +8,9 @@ import org.springframework.data.annotation.Id;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.ProposedOutcomeUpdated;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.QuestionnaireAnswersUpdated;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementApplicationId;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementCode;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.ConfigId;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementConfigurationId;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
 import java.util.List;
 
@@ -45,7 +46,7 @@ class AchievementApplication {
     }
     
 
-    boolean isAchievementAvailableInEvaluationProcess(ConfigId configId,
+    boolean isAchievementAvailableInEvaluationProcess(AchievementConfigurationId configId,
             AchievementConfigurationService achievementConfigurationService) {
         return achievementConfigurationService.isAchievementAvailableInEvaluationProcess(achievementCode, configId);
     }

@@ -1,15 +1,14 @@
-package pl.kacper.starzynski.employeeGratification.achievementCard.domain;
+package pl.kacper.starzynski.employeeGratification.sharedKernel;
 
 import com.mongodb.annotations.Immutable;
-
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Immutable
 @AllArgsConstructor
-@EqualsAndHashCode
 @Getter
-public class ProposedOutcome {
-    private final String proposedOutcome;
+@EqualsAndHashCode
+public class AchievementCode {
+    private final String code;
 }

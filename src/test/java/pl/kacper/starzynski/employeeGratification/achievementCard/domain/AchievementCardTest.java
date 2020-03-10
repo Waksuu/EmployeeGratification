@@ -5,9 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationApplied;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementApplicationId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.QuestionId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.QuestionnaireId;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,7 +47,8 @@ class AchievementCardTest {
 
     @BeforeEach
     void init() {
-        lenient().when(achievementConfigurationServiceMock.isAchievementAvailableInEvaluationProcess(any(), any())).thenReturn(true);
+        lenient().when(achievementConfigurationServiceMock.isAchievementAvailableInEvaluationProcess(any(), any())).thenReturn(
+                true);
         achievementCard = AchievementCardBuilder.createEmptyAchievementCard(UnaryOperator.identity());
     }
 
@@ -59,7 +62,7 @@ class AchievementCardTest {
         var event = achievementCard.applyForAchievement(application, achievementConfigurationServiceMock);
 
         // THEN
-        assertEquals(application.getId(), event.getAchievementApplicationId());
+        assertApplicationIsAdded(application, event);
     }
 
     @Test
@@ -69,8 +72,7 @@ class AchievementCardTest {
         when(achievementConfigurationServiceMock.isAchievementAvailableInEvaluationProcess(any(), any())).thenReturn(false);
 
         // WHEN & Exception
-        assertThrows(AchievementException.class, () -> achievementCard.applyForAchievement(application,
-                achievementConfigurationServiceMock));
+        assertApplyingForApplicationFailed(application);
     }
 
     @Test
@@ -81,8 +83,7 @@ class AchievementCardTest {
 
         // WHEN & Exception
         achievementCard.applyForAchievement(firstApplication, achievementConfigurationServiceMock);
-        assertThrows(AchievementException.class, () -> achievementCard.applyForAchievement(secondApplication,
-                achievementConfigurationServiceMock));
+        assertApplyingForApplicationFailed(secondApplication);
     }
 
     @Test
@@ -97,15 +98,15 @@ class AchievementCardTest {
         var secondEvent = achievementCard.applyForAchievement(secondApplication, achievementConfigurationServiceMock);
 
         // THEN
-        assertEquals(firstApplication.getId(), firstEvent.getAchievementApplicationId());
-        assertEquals(secondApplication.getId(), secondEvent.getAchievementApplicationId());
+        assertApplicationIsAdded(firstApplication, firstEvent);
+        assertApplicationIsAdded(secondApplication, secondEvent);
     }
 
     @Test
     void shouldAddAchievementApplication_twoSameRepeatableAchievements() {
         // GIVEN
         var firstApplication = AchievementApplicationBuilder.createRepeatableAchievementApplication(UnaryOperator.identity());
-        var secondApplication = AchievementApplicationBuilder.createRepeatableAchievementApplication(x-> x.proposedOutcome("3"));
+        var secondApplication = AchievementApplicationBuilder.createRepeatableAchievementApplication(x -> x.proposedOutcome("3"));
         when(achievementConfigurationServiceMock.canBeAppliedForMultipleTimes(any())).thenReturn(true);
 
         // WHEN
@@ -113,8 +114,8 @@ class AchievementCardTest {
         var secondEvent = achievementCard.applyForAchievement(secondApplication, achievementConfigurationServiceMock);
 
         // THEN
-        assertEquals(firstApplication.getId(), firstEvent.getAchievementApplicationId());
-        assertEquals(secondApplication.getId(), secondEvent.getAchievementApplicationId());
+        assertApplicationIsAdded(firstApplication, firstEvent);
+        assertApplicationIsAdded(secondApplication, secondEvent);
     }
 
     @Test
@@ -201,5 +202,14 @@ class AchievementCardTest {
         // WHEN & Exception
         assertThrows(AchievementException.class,
                 () -> achievementCard.updateQuestionnaireAnswers(new AchievementApplicationId(UUID.randomUUID()), ANSWERS));
+    }
+
+    private void assertApplicationIsAdded(AchievementApplication application, AchievementApplicationApplied event) {
+        assertEquals(application.getId(), event.getAchievementApplicationId());
+    }
+
+    private void assertApplyingForApplicationFailed(AchievementApplication application) {
+        assertThrows(AchievementException.class, () -> achievementCard.applyForAchievement(application,
+                achievementConfigurationServiceMock));
     }
 }

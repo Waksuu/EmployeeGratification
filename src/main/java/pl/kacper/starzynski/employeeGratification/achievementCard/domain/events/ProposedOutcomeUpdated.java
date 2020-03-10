@@ -4,7 +4,7 @@ import com.mongodb.annotations.Immutable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementApplicationId;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.ProposedOutcome;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
 @AllArgsConstructor
 @Getter

@@ -1,6 +1,6 @@
 package pl.kacper.starzynski.employeeGratification.achievementCard.domain.state;
 
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.*;
+import pl.kacper.starzynski.employeeGratification.achievementCard.domain.AchievementException;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationApplied;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationRemoved;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.ProposedOutcomeUpdated;

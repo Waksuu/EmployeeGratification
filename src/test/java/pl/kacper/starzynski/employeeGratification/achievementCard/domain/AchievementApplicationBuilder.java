@@ -1,7 +1,8 @@
 package pl.kacper.starzynski.employeeGratification.achievementCard.domain;
 
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementApplicationId;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementCode;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
 import java.util.Collections;
 import java.util.UUID;
