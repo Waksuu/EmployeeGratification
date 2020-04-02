@@ -36,4 +36,8 @@ public class ProposedOutcome {
 
         return value <= 1 && value >= 0;
     }
+
+    public boolean isFilled() {
+        return !proposedOutcome.isBlank();
+    }
 }

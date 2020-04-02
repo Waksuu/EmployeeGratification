@@ -10,6 +10,7 @@ import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identit
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.QuestionId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.QuestionnaireId;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementException;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
 import java.util.Arrays;

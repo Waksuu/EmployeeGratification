@@ -2,9 +2,9 @@ package pl.kacper.starzynski.employeeGratification.achievementConfig.domain;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.annotation.Id;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.AchievementException;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementConfigurationId;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementException;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
 import java.util.List;

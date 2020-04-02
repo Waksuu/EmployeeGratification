@@ -10,6 +10,7 @@ import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementApplicationId;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementConfigurationId;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementException;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
 import java.util.List;
@@ -55,7 +56,7 @@ class AchievementApplication {
         return achievementConfigurationService.canBeAppliedForMultipleTimes(achievementCode, configId);
     }
 
-    boolean areAnswersFilled() {
-        return answers.stream().allMatch(QuestionnaireAnswer::isAnswerFilled);
+    boolean isApplicationFilled() {
+        return answers.stream().allMatch(QuestionnaireAnswer::isAnswerFilled) && proposedOutcome.isFilled();
     }
 }

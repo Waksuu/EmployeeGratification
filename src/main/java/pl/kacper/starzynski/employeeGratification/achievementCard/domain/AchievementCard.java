@@ -11,6 +11,7 @@ import pl.kacper.starzynski.employeeGratification.achievementCard.domain.state.A
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.state.DraftAchievementCardState;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementConfigurationId;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementException;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
 import java.util.Collections;
@@ -115,13 +116,13 @@ public class AchievementCard {
     }
 
     public void moveToPromotionMeeting() {
-        validateAllQuestionsAnswered();
+        validateAllApplicationsFilled();
         state = state.ToPromotionMeeting();
     }
 
-    private void validateAllQuestionsAnswered() {
-        boolean allQuestionsAnswered = requestedApplications.stream().allMatch(AchievementApplication::areAnswersFilled);
-        if (!allQuestionsAnswered) {
+    private void validateAllApplicationsFilled() {
+        boolean areAllApplicationsFilled = requestedApplications.stream().allMatch(AchievementApplication::isApplicationFilled);
+        if (!areAllApplicationsFilled) {
             throw new AchievementException();
         }
     }
