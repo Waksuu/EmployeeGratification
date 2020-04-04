@@ -1,5 +1,6 @@
 package pl.kacper.starzynski.employeeGratification.achievementCard.domain.state;
 
+import org.springframework.data.annotation.TypeAlias;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationApplied;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationRemoved;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.ProposedOutcomeUpdated;
@@ -8,6 +9,7 @@ import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementExcept
 
 import java.util.function.Supplier;
 
+@TypeAlias("employeeGratification.achievementCard.PublishedAchievementCardState")
 public class PublishedAchievementCardState implements AchievementCardState {
     @Override
     public AchievementCardState toDraft() {

@@ -11,15 +11,15 @@ import java.util.Optional;
 @AllArgsConstructor
 @Repository
 public class AchievementCardRepositoryMongoAdapter implements AchievementCardRepository {
-    private final AchievementCardMongoRepository achievementCardRepository;
+    private final AchievementCardMongoRepository achievementCardMongoRepository;
 
     @Override
     public Optional<AchievementCard> findById(AchievementCardId achievementCardId) {
-        return achievementCardRepository.findById(achievementCardId);
+        return achievementCardMongoRepository.findById(achievementCardId);
     }
 
     @Override
     public void save(AchievementCard achievementCard) {
-        achievementCardRepository.save(achievementCard);
+        achievementCardMongoRepository.save(achievementCard);
     }
 }
