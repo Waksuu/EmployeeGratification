@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>achievement-configuration</artifactId>
+
     <dependencies>
         <dependency>
             <groupId>pl.kacper.starzynski.employeeGratification</groupId>
@@ -24,6 +25,5 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
-
 
 </project>
