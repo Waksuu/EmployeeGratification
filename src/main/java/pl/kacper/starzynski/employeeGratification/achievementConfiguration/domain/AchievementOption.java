@@ -8,7 +8,7 @@ import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 @Immutable
 @EqualsAndHashCode
 @AllArgsConstructor
-public class AchievementOption {
+class AchievementOption {
     private final String achievementOption;
 
     public boolean isEqualTo(ProposedOutcome proposedOutcome) {

@@ -3,7 +3,7 @@ package pl.kacper.starzynski.employeeGratification.achievementConfiguration.doma
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
-public class PartialyRepeatableAchievement extends Achievement {
+class PartialyRepeatableAchievement extends Achievement {
     public PartialyRepeatableAchievement(AchievementCode achievementCode) {
         super(achievementCode);
     }

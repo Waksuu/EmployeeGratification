@@ -9,7 +9,7 @@ import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 @Immutable
 @AllArgsConstructor
 @EqualsAndHashCode
-public abstract class Achievement {
+abstract class Achievement {
     private final AchievementCode achievementCode;
 
     abstract boolean isProposedOutcomeValid(ProposedOutcome proposedOutcome);

@@ -5,7 +5,7 @@ import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
 import java.util.List;
 
-public class MaintainableAchievement extends Achievement {
+class MaintainableAchievement extends Achievement {
     private final List<AchievementOption> achievementOptions;
 
     public MaintainableAchievement(AchievementCode achievementCode,
