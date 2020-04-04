@@ -4,9 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import pl.kacper.starzynski.employeeGratification.achievementCard.application.AchievementCardService;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.AchievementCardRepository;
+import pl.kacper.starzynski.employeeGratification.achievementCard.domain.AchievementCard;
+import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementCardId;
+import pl.kacper.starzynski.employeeGratification.achievementCard.infrastructure.mongo.AchievementCardMongoRepository;
 import pl.kacper.starzynski.employeeGratification.achievementCard.readmodel.AchievementApplicationDTO;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementConfigurationId;
 
+import java.util.Collections;
 import java.util.UUID;
 
 @RestController
@@ -14,7 +18,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class AchievementController {
     private final AchievementCardService achievementCardService;
-    private final AchievementCardRepository achievementCardRepository;
+    private final AchievementCardMongoRepository achievementCardRepository;
 
     @PostMapping(path = "/{achievementCardId}/achievement-application", consumes = MediaType.APPLICATION_JSON_VALUE)
     void getALlAchievements(@PathVariable UUID achievementCardId, @RequestBody
@@ -22,13 +26,9 @@ public class AchievementController {
         achievementCardService.applyForAchievement(achievementCardId, achievementApplicationDTO);
     }
 
-//    @GetMapping(path = "/test")
-//    void get() {
-////        var a = achievementCardRepository.findAll();
-////        a.get(0).moveToPromotionMeeting();
-////        achievementCardRepository.save(a.get(0));
-//        var uuid = new AchievementCardId(UUID.randomUUID());
-//        achievementCardRepository.save(new AchievementCard(uuid, Collections.emptyList(),
-//                new AchievementConfigurationId(UUID.randomUUID())));
-//    }
+    @GetMapping(path = "/test")
+    void get() {
+        var a = achievementCardRepository.save(new AchievementCard(new AchievementCardId(UUID.randomUUID()), Collections.emptyList(), new AchievementConfigurationId(UUID.randomUUID())));
+        System.out.print(a.toString());
+    }
 }

@@ -1,7 +1,11 @@
 package pl.kacper.starzynski.employeeGratification.achievementCard.domain;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementCardId;
 
-public interface AchievementCardRepository extends MongoRepository<AchievementCard, AchievementCardId> {
+import java.util.Optional;
+
+public interface AchievementCardRepository {
+    Optional<AchievementCard> findById(AchievementCardId achievementCardId);
+
+    void save(AchievementCard achievementCard);
 }

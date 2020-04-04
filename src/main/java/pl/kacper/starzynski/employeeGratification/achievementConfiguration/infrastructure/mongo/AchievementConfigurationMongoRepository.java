@@ -1,0 +1,8 @@
+package pl.kacper.starzynski.employeeGratification.achievementConfiguration.infrastructure.mongo;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+import pl.kacper.starzynski.employeeGratification.achievementConfiguration.domain.AchievementConfiguration;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementConfigurationId;
+
+public interface AchievementConfigurationMongoRepository extends MongoRepository<AchievementConfiguration, AchievementConfigurationId> {
+}

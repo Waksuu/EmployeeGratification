@@ -1,4 +1,4 @@
-package pl.kacper.starzynski.employeeGratification.achievementConfig.domain;
+package pl.kacper.starzynski.employeeGratification.achievementConfiguration.domain;
 
 import com.mongodb.annotations.Immutable;
 import lombok.AllArgsConstructor;
