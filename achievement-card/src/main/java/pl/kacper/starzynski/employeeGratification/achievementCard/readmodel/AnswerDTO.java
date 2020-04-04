@@ -1,10 +1,10 @@
 package pl.kacper.starzynski.employeeGratification.achievementCard.readmodel;
 
-import java.io.Serializable;
-import java.util.UUID;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
+import java.io.Serializable;
+import java.util.UUID;
 
 @Getter
 @AllArgsConstructor

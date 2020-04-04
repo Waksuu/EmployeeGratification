@@ -1,9 +1,10 @@
 package pl.kacper.starzynski.employeeGratification.achievementCard.readmodel;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.io.Serializable;
 import java.util.List;
-
-import lombok.*;
 
 @Getter
 @AllArgsConstructor

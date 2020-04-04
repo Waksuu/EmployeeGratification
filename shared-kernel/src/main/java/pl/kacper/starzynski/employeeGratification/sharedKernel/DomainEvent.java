@@ -1,9 +1,9 @@
 package pl.kacper.starzynski.employeeGratification.sharedKernel;
 
+import lombok.Getter;
+
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-
-import lombok.Getter;
 
 @Getter
 public abstract class DomainEvent {
