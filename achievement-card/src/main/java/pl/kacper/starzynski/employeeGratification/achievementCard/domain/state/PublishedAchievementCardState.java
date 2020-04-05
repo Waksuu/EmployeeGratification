@@ -10,7 +10,7 @@ import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementExcept
 import java.util.function.Supplier;
 
 @TypeAlias("employeeGratification.achievementCard.PublishedAchievementCardState")
-public class PublishedAchievementCardState implements AchievementCardState {
+class PublishedAchievementCardState implements AchievementCardState {
     @Override
     public AchievementCardState toDraft() {
         return this;

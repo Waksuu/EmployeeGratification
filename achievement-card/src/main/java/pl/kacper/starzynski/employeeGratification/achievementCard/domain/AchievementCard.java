@@ -35,20 +35,20 @@ public class AchievementCard {
     }
 
     public AchievementApplicationApplied applyForAchievement(AchievementCode achievementCode, ProposedOutcome proposedOutcome,
-            AchievementConfigurationService achievementConfigurationService) {
+            MyBusinessNeedDomainService myBusinessNeedDomainService) {
         return state.applyForAchievement(() -> {
             var application = AchievementApplicationFactory.create(new AchievementApplicationId(UUID.randomUUID()),
                     achievementCode,
                     proposedOutcome,
                     Collections.emptyList(),
                     configId,
-                    achievementConfigurationService);
+                    myBusinessNeedDomainService);
 
-            if (!application.isAchievementAvailableInEvaluationProcess(configId, achievementConfigurationService)) {
+            if (!application.isAchievementAvailableInEvaluationProcess(configId, myBusinessNeedDomainService)) {
                 throw new AchievementException();
             }
 
-            if (conflictOfInterest(application, achievementConfigurationService)) {
+            if (conflictOfInterest(application, myBusinessNeedDomainService)) {
                 throw new AchievementException();
             }
 
@@ -58,9 +58,9 @@ public class AchievementCard {
     }
 
     private boolean conflictOfInterest(AchievementApplication application,
-            AchievementConfigurationService achievementConfigurationService) {
+            MyBusinessNeedDomainService myBusinessNeedDomainService) {
         return achievementIsAlreadyRequested(application) &&
-                !application.canBeAppliedForMultipleTimes(configId, achievementConfigurationService);
+                !application.canBeAppliedForMultipleTimes(configId, myBusinessNeedDomainService);
     }
 
     private boolean achievementIsAlreadyRequested(AchievementApplication application) {
@@ -84,10 +84,10 @@ public class AchievementCard {
     }
 
     public ProposedOutcomeUpdated updateProposedOutcome(AchievementApplicationId achievementApplicationId,
-            ProposedOutcome proposedOutcome, AchievementConfigurationService achievementConfigurationService) {
+            ProposedOutcome proposedOutcome, MyBusinessNeedDomainService myBusinessNeedDomainService) {
         return this.state.updateProposedOutcome(() -> {
             var application = getAchievementApplication(achievementApplicationId);
-            return application.updateProposedOutcome(proposedOutcome, configId, achievementConfigurationService);
+            return application.updateProposedOutcome(proposedOutcome, configId, myBusinessNeedDomainService);
         });
     }
 

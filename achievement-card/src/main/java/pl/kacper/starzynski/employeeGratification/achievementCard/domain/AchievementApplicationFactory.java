@@ -8,10 +8,10 @@ import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
 import java.util.List;
 
-public class AchievementApplicationFactory {
-    public static AchievementApplication create(AchievementApplicationId id, AchievementCode achievementCode, ProposedOutcome proposedOutcome,
-            List<QuestionnaireAnswer> answers, AchievementConfigurationId configId, AchievementConfigurationService achievementConfigurationService) {
-        if (achievementConfigurationService.isProposedOutcomeInvalid(achievementCode, proposedOutcome, configId)) {
+class AchievementApplicationFactory {
+    static AchievementApplication create(AchievementApplicationId id, AchievementCode achievementCode, ProposedOutcome proposedOutcome,
+            List<QuestionnaireAnswer> answers, AchievementConfigurationId configId, MyBusinessNeedDomainService myBusinessNeedDomainService) {
+        if (myBusinessNeedDomainService.isProposedOutcomeInvalid(achievementCode, proposedOutcome, configId)) {
             throw new AchievementException();
         }
 

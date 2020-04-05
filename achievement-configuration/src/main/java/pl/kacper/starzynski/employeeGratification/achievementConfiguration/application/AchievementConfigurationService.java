@@ -3,7 +3,6 @@ package pl.kacper.starzynski.employeeGratification.achievementConfiguration.appl
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.AchievementConfigurationService;
 import pl.kacper.starzynski.employeeGratification.achievementConfiguration.domain.AchievementConfigurationRepository;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementConfigurationId;
@@ -13,10 +12,9 @@ import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 @Service
 @AllArgsConstructor
 @Transactional
-public class AchievementConfigurationServiceImpl implements AchievementConfigurationService {
+public class AchievementConfigurationService {
     private final AchievementConfigurationRepository achievementConfigurationRepository;
 
-    @Override
     public boolean isProposedOutcomeInvalid(AchievementCode achievementCode, ProposedOutcome proposedOutcome,
             AchievementConfigurationId configId) {
         var configuration = achievementConfigurationRepository.findById(configId)
@@ -24,14 +22,12 @@ public class AchievementConfigurationServiceImpl implements AchievementConfigura
         return configuration.isProposedOutcomeInvalid(achievementCode, proposedOutcome);
     }
 
-    @Override
     public boolean isAchievementAvailableInEvaluationProcess(AchievementCode achievementCode, AchievementConfigurationId configId) {
         var configuration = achievementConfigurationRepository.findById(configId)
                 .orElseThrow(AchievementException::new);
         return configuration.isAchievementAvailableInEvaluationProcess(achievementCode);
     }
 
-    @Override
     public boolean canBeAppliedForMultipleTimes(AchievementCode achievementCode, AchievementConfigurationId configId) {
         var configuration = achievementConfigurationRepository.findById(configId)
                 .orElseThrow(AchievementException::new);

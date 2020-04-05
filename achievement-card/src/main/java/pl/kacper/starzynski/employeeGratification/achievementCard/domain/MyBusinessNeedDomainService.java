@@ -4,8 +4,8 @@ import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementConfigurationId;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
-//TODO: Make it cachable
-public interface AchievementConfigurationService {
+//TODO: Find better domain names
+public interface MyBusinessNeedDomainService {
     boolean isProposedOutcomeInvalid(AchievementCode achievementCode, ProposedOutcome proposedOutcome,
             AchievementConfigurationId configId);
 

@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @Repository
-public class AchievementCardRepositoryMongoAdapter implements AchievementCardRepository {
+class AchievementCardRepositoryMongoAdapter implements AchievementCardRepository {
     private final AchievementCardMongoRepository achievementCardMongoRepository;
 
     @Override

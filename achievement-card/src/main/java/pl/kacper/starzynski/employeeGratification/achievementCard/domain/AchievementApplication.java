@@ -32,8 +32,8 @@ class AchievementApplication {
     }
 
     ProposedOutcomeUpdated updateProposedOutcome(ProposedOutcome proposedOutcome, AchievementConfigurationId configId,
-            AchievementConfigurationService achievementConfigurationService) {
-        if (achievementConfigurationService.isProposedOutcomeInvalid(achievementCode, proposedOutcome, configId)) {
+            MyBusinessNeedDomainService myBusinessNeedDomainService) {
+        if (myBusinessNeedDomainService.isProposedOutcomeInvalid(achievementCode, proposedOutcome, configId)) {
             throw new AchievementException();
         }
 
@@ -48,12 +48,12 @@ class AchievementApplication {
     
 
     boolean isAchievementAvailableInEvaluationProcess(AchievementConfigurationId configId,
-            AchievementConfigurationService achievementConfigurationService) {
-        return achievementConfigurationService.isAchievementAvailableInEvaluationProcess(achievementCode, configId);
+            MyBusinessNeedDomainService myBusinessNeedDomainService) {
+        return myBusinessNeedDomainService.isAchievementAvailableInEvaluationProcess(achievementCode, configId);
     }
 
-    boolean canBeAppliedForMultipleTimes(AchievementConfigurationId configId, AchievementConfigurationService achievementConfigurationService) {
-        return achievementConfigurationService.canBeAppliedForMultipleTimes(achievementCode, configId);
+    boolean canBeAppliedForMultipleTimes(AchievementConfigurationId configId, MyBusinessNeedDomainService myBusinessNeedDomainService) {
+        return myBusinessNeedDomainService.canBeAppliedForMultipleTimes(achievementCode, configId);
     }
 
     boolean isApplicationFilled() {
