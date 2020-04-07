@@ -1,4 +1,4 @@
-package pl.kacper.starzynski.employeeGratification.achievementCard.domain.ports;
+package pl.kacper.starzynski.employeeGratification.achievementCard.domain.externalPorts;
 
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementConfigurationId;

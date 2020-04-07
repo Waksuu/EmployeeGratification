@@ -5,9 +5,9 @@ import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationRemoved;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.ProposedOutcomeUpdated;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.QuestionnaireAnswersUpdated;
+import pl.kacper.starzynski.employeeGratification.achievementCard.domain.externalPorts.AchievementConfigurationService;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementApplicationId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementCardId;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.ports.AchievementConfigurationService;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.state.AchievementCardState;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.state.DraftAchievementCardState;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;

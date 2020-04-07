@@ -21,7 +21,7 @@ public class AchievementController {
     private final AchievementCardMongoRepository achievementCardRepository;
 
     @PostMapping(path = "/{achievementCardId}/achievement-application", consumes = MediaType.APPLICATION_JSON_VALUE)
-    void getALlAchievements(@PathVariable UUID achievementCardId, @RequestBody
+    void getALlAchievements(@PathVariable AchievementCardId achievementCardId, @RequestBody
             AchievementApplicationDTO achievementApplicationDTO) {
         achievementCardService.applyForAchievement(achievementCardId, achievementApplicationDTO);
     }

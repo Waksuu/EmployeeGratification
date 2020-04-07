@@ -1,5 +1,5 @@
 module pl.kacper.starzynski.employeeGratification.achievementCard {
-    exports pl.kacper.starzynski.employeeGratification.achievementCard.domain.ports to
+    exports pl.kacper.starzynski.employeeGratification.achievementCard.domain.externalPorts to
             pl.kacper.starzynski.employeeGratification.achievementConfiguration;
     requires lombok;
     requires spring.tx;

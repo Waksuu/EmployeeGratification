@@ -3,7 +3,7 @@ package pl.kacper.starzynski.employeeGratification.achievementConfiguration.appl
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.ports.AchievementConfigurationService;
+import pl.kacper.starzynski.employeeGratification.achievementCard.domain.externalPorts.AchievementConfigurationService;
 import pl.kacper.starzynski.employeeGratification.achievementConfiguration.domain.AchievementConfigurationRepository;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementConfigurationId;
