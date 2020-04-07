@@ -7,6 +7,7 @@ import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.QuestionnaireAnswersUpdated;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementApplicationId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementCardId;
+import pl.kacper.starzynski.employeeGratification.achievementCard.domain.ports.AchievementConfigurationService;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.state.AchievementCardState;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.state.DraftAchievementCardState;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
@@ -20,6 +21,7 @@ import java.util.UUID;
 
 import static java.util.stream.Collectors.toList;
 
+//TODO: Add version
 public class AchievementCard {
     @Id
     private final AchievementCardId id;
@@ -35,20 +37,20 @@ public class AchievementCard {
     }
 
     public AchievementApplicationApplied applyForAchievement(AchievementCode achievementCode, ProposedOutcome proposedOutcome,
-            MyBusinessNeedDomainService myBusinessNeedDomainService) {
+            AchievementConfigurationService achievementConfigurationService) {
         return state.applyForAchievement(() -> {
             var application = AchievementApplicationFactory.create(new AchievementApplicationId(UUID.randomUUID()),
                     achievementCode,
                     proposedOutcome,
                     Collections.emptyList(),
                     configId,
-                    myBusinessNeedDomainService);
+                    achievementConfigurationService);
 
-            if (!application.isAchievementAvailableInEvaluationProcess(configId, myBusinessNeedDomainService)) {
+            if (!application.isAchievementAvailableInEvaluationProcess(configId, achievementConfigurationService)) {
                 throw new AchievementException();
             }
 
-            if (conflictOfInterest(application, myBusinessNeedDomainService)) {
+            if (conflictOfInterest(application, achievementConfigurationService)) {
                 throw new AchievementException();
             }
 
@@ -58,9 +60,9 @@ public class AchievementCard {
     }
 
     private boolean conflictOfInterest(AchievementApplication application,
-            MyBusinessNeedDomainService myBusinessNeedDomainService) {
+            AchievementConfigurationService achievementConfigurationService) {
         return achievementIsAlreadyRequested(application) &&
-                !application.canBeAppliedForMultipleTimes(configId, myBusinessNeedDomainService);
+                !application.canBeAppliedForMultipleTimes(configId, achievementConfigurationService);
     }
 
     private boolean achievementIsAlreadyRequested(AchievementApplication application) {
@@ -84,10 +86,10 @@ public class AchievementCard {
     }
 
     public ProposedOutcomeUpdated updateProposedOutcome(AchievementApplicationId achievementApplicationId,
-            ProposedOutcome proposedOutcome, MyBusinessNeedDomainService myBusinessNeedDomainService) {
+            ProposedOutcome proposedOutcome, AchievementConfigurationService achievementConfigurationService) {
         return this.state.updateProposedOutcome(() -> {
             var application = getAchievementApplication(achievementApplicationId);
-            return application.updateProposedOutcome(proposedOutcome, configId, myBusinessNeedDomainService);
+            return application.updateProposedOutcome(proposedOutcome, configId, achievementConfigurationService);
         });
     }
 

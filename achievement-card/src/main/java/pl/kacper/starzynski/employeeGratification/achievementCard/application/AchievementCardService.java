@@ -5,12 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.AchievementCardRepository;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.Answer;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.MyBusinessNeedDomainService;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.QuestionnaireAnswer;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementApplicationId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementCardId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.QuestionId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.QuestionnaireId;
+import pl.kacper.starzynski.employeeGratification.achievementCard.domain.ports.AchievementConfigurationService;
 import pl.kacper.starzynski.employeeGratification.achievementCard.readmodel.AchievementApplicationDTO;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementException;
@@ -26,14 +26,14 @@ import static java.util.stream.Collectors.toList;
 @Transactional
 public class AchievementCardService {
     private final AchievementCardRepository achievementCardRepository;
-    private final MyBusinessNeedDomainService myBusinessNeedDomainService;
+    private final AchievementConfigurationService achievementConfigurationService;
 
     public void applyForAchievement(UUID achievementCardId, AchievementApplicationDTO dto) {
         var achievementCard = achievementCardRepository.findById(new AchievementCardId(achievementCardId))
                 .orElseThrow(AchievementException::new);
 
         achievementCard.applyForAchievement(new AchievementCode(dto.getAchievementCode()),
-                new ProposedOutcome(dto.getProposedOutcome()), myBusinessNeedDomainService);
+                new ProposedOutcome(dto.getProposedOutcome()), achievementConfigurationService);
         achievementCardRepository.save(achievementCard);
     }
 
@@ -51,7 +51,7 @@ public class AchievementCardService {
 
         AchievementApplicationId applicationId = new AchievementApplicationId(achievementApplicationId);
         achievementCard.updateProposedOutcome(applicationId, new ProposedOutcome(dto.getProposedOutcome()),
-                myBusinessNeedDomainService);
+                achievementConfigurationService);
         achievementCard.updateQuestionnaireAnswers(applicationId, getAnswers(dto));
 
         achievementCardRepository.save(achievementCard);

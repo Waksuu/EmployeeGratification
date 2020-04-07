@@ -1,5 +1,6 @@
 module pl.kacper.starzynski.employeeGratification.achievementCard {
-    requires spring.context;
+    exports pl.kacper.starzynski.employeeGratification.achievementCard.domain.ports to
+            pl.kacper.starzynski.employeeGratification.achievementConfiguration;
     requires lombok;
     requires spring.tx;
     requires spring.data.mongodb;
@@ -7,5 +8,5 @@ module pl.kacper.starzynski.employeeGratification.achievementCard {
     requires org.mongodb.driver.core;
     requires spring.data.commons;
     requires pl.kacper.starzynski.employeeGratification.sharedKernel;
-    requires pl.kacper.starzynski.employeeGratification.achievementConfiguration;
+    requires spring.context;
 }
