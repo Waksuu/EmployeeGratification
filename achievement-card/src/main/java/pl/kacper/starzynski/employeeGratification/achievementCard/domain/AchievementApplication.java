@@ -1,7 +1,5 @@
 package pl.kacper.starzynski.employeeGratification.achievementCard.domain;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
@@ -14,19 +12,24 @@ import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementConfig
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementException;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 class AchievementApplication {
     @Id
     @Getter
     @EqualsAndHashCode.Include
     //TODO: Think of some natural identity
-    private final AchievementApplicationId id;
+    private final AchievementApplicationId id = new AchievementApplicationId();
     private final AchievementCode achievementCode;
     private ProposedOutcome proposedOutcome;
-    private List<QuestionnaireAnswer> answers;
+    private List<QuestionnaireAnswer> answers = new ArrayList<>();
+
+    AchievementApplication(AchievementCode achievementCode, ProposedOutcome proposedOutcome) {
+        this.achievementCode = achievementCode;
+        this.proposedOutcome = proposedOutcome;
+    }
 
     boolean areAchievementsEqual(AchievementApplication application) {
         return application.achievementCode.equals(achievementCode);

@@ -18,17 +18,15 @@ import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementExcept
 public class AchievementCardService {
     private final AchievementCardRepository achievementCardRepository;
     private final AchievementConfigurationService achievementConfigurationService;
+    private final AchievementApplicationFactory achievementApplicationFactory;
 
     public void applyForAchievement(AchievementCardId achievementCardId, AchievementApplicationDTO dto) {
         getAchievementCard(achievementCardId).applyForAchievement(dto.getAchievementCode(), dto.getProposedOutcome(),
                 achievementConfigurationService, achievementApplicationFactory);
     }
 
-    public void removeAchievementApplication(UUID achievementCardId, UUID achievementApplicationId) {
-        var achievementCard = achievementCardRepository.findById(new AchievementCardId(achievementCardId))
-                .orElseThrow(AchievementException::new);
-        achievementCard.removeAchievementApplication(new AchievementApplicationId(achievementApplicationId));
-        achievementCardRepository.save(achievementCard);
+    public void removeAchievementApplication(AchievementCardId achievementCardId, AchievementApplicationId achievementApplicationId) {
+        getAchievementCard(achievementCardId).removeAchievementApplication(achievementApplicationId);
     }
 
     public void updateAchievementApplication(AchievementCardId achievementCardId, AchievementApplicationId achievementApplicationId, AchievementApplicationDTO dto) {

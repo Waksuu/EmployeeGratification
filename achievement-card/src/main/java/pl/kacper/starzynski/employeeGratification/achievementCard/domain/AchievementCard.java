@@ -15,9 +15,7 @@ import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementConfig
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementException;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 import static java.util.stream.Collectors.toList;
 
@@ -37,13 +35,9 @@ public class AchievementCard {
     }
 
     public AchievementApplicationApplied applyForAchievement(AchievementCode achievementCode, ProposedOutcome proposedOutcome,
-            AchievementConfigurationService achievementConfigurationService) {
+            AchievementConfigurationService achievementConfigurationService, AchievementApplicationFactory achievementApplicationFactory) {
         return state.applyForAchievement(() -> {
-            var application = AchievementApplicationFactory.create(new AchievementApplicationId(UUID.randomUUID()),
-                    achievementCode,
-                    proposedOutcome,
-                    Collections.emptyList(),
-                    configId,
+            var application = achievementApplicationFactory.create(achievementCode, proposedOutcome, configId,
                     achievementConfigurationService);
 
             if (!application.isAchievementAvailableInEvaluationProcess(configId, achievementConfigurationService)) {
@@ -72,17 +66,9 @@ public class AchievementCard {
 
     public AchievementApplicationRemoved removeAchievementApplication(AchievementApplicationId achievementApplicationId) {
         return this.state.removeAchievementApplication(() -> {
-            if (applicationDoesNotExist(achievementApplicationId)) {
-                throw new AchievementException();
-            }
-
             requestedApplications.removeIf(application -> application.getId().equals(achievementApplicationId));
             return new AchievementApplicationRemoved(achievementApplicationId);
         });
-    }
-
-    private boolean applicationDoesNotExist(AchievementApplicationId achievementApplicationId) {
-        return requestedApplications.stream().noneMatch(application -> application.getId().equals(achievementApplicationId));
     }
 
     public ProposedOutcomeUpdated updateProposedOutcome(AchievementApplicationId achievementApplicationId,
