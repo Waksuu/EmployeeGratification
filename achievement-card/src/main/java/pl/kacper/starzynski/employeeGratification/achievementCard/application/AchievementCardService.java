@@ -21,12 +21,14 @@ public class AchievementCardService {
     private final AchievementApplicationFactory achievementApplicationFactory;
 
     public void applyForAchievement(AchievementCardId achievementCardId, AchievementApplicationDTO dto) {
-        getAchievementCard(achievementCardId).applyForAchievement(dto.getAchievementCode(), dto.getProposedOutcome(),
+        var achievementCard = getAchievementCard(achievementCardId);
+        achievementCard.applyForAchievement(dto.getAchievementCode(), dto.getProposedOutcome(),
                 achievementConfigurationService, achievementApplicationFactory);
     }
 
     public void removeAchievementApplication(AchievementCardId achievementCardId, AchievementApplicationId achievementApplicationId) {
-        getAchievementCard(achievementCardId).removeAchievementApplication(achievementApplicationId);
+        var achievementCard = getAchievementCard(achievementCardId);
+        achievementCard.removeAchievementApplication(achievementApplicationId);
     }
 
     public void updateAchievementApplication(AchievementCardId achievementCardId, AchievementApplicationId achievementApplicationId, AchievementApplicationDTO dto) {
@@ -36,7 +38,8 @@ public class AchievementCardService {
     }
 
     public void markAsReadToPromoMeeting(AchievementCardId achievementCardId) {
-        getAchievementCard(achievementCardId).moveToPromotionMeeting();
+        var achievementCard = getAchievementCard(achievementCardId);
+        achievementCard.moveToPromotionMeeting();
     }
 
     private AchievementCard getAchievementCard(AchievementCardId achievementCardId) {
