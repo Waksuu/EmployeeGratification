@@ -9,4 +9,5 @@ module pl.kacper.starzynski.employeeGratification.achievementCard {
     requires spring.data.commons;
     requires pl.kacper.starzynski.employeeGratification.sharedKernel;
     requires spring.context;
+    requires spring.core;
 }

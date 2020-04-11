@@ -1,7 +1,6 @@
 package pl.kacper.starzynski.employeeGratification.achievementCard.webui;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import pl.kacper.starzynski.employeeGratification.achievementCard.application.AchievementCardService;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.AchievementCard;
@@ -20,7 +19,7 @@ public class AchievementController {
     private final AchievementCardService achievementCardService;
     private final AchievementCardMongoRepository achievementCardRepository;
 
-    @PostMapping(path = "/{achievementCardId}/achievement-application", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/{achievementCardId}/achievement-application")
     void getALlAchievements(@PathVariable AchievementCardId achievementCardId, @RequestBody
             AchievementApplicationDTO achievementApplicationDTO) {
         achievementCardService.applyForAchievement(achievementCardId, achievementApplicationDTO);
