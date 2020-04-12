@@ -3,9 +3,7 @@ package pl.kacper.starzynski.employeeGratification.achievementCard.application;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.AchievementApplicationFactory;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.AchievementCard;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.AchievementCardRepository;
+import pl.kacper.starzynski.employeeGratification.achievementCard.domain.*;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.externalPorts.AchievementConfigurationService;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementApplicationId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementCardId;
@@ -19,10 +17,13 @@ public class AchievementCardService {
     private final AchievementCardRepository achievementCardRepository;
     private final AchievementConfigurationService achievementConfigurationService;
     private final AchievementApplicationFactory achievementApplicationFactory;
+    private final QuestionnaireAnswersFactory questionnaireAnswersFactory;
 
     public void applyForAchievement(AchievementCardId achievementCardId, AchievementApplicationDTO dto) {
         var achievementCard = getAchievementCard(achievementCardId);
-        achievementCard.applyForAchievement(dto.getAchievementCode(), dto.getProposedOutcome(),
+        // TODO: ???
+        QuestionnaireAnswers questionnaireAnswers = questionnaireAnswersFactory.createQuestionnaireAnswersForAchievement(dto.getAchievementCode());
+        achievementCard.applyForAchievement(dto.getAchievementCode(), dto.getProposedOutcome(), questionnaireAnswers,
                 achievementConfigurationService, achievementApplicationFactory);
     }
 

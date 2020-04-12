@@ -3,16 +3,17 @@ package pl.kacper.starzynski.employeeGratification.achievementCard.domain;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.util.Pair;
+import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AnswersUpdated;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.ProposedOutcomeUpdated;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.QuestionnaireAnswersUpdated;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.externalPorts.AchievementConfigurationService;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementApplicationId;
+import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.QuestionId;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementConfigurationId;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementException;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -24,11 +25,13 @@ class AchievementApplication {
     private final AchievementApplicationId id = new AchievementApplicationId();
     private final AchievementCode achievementCode;
     private ProposedOutcome proposedOutcome;
-    private List<QuestionnaireAnswer> answers = new ArrayList<>();
+    private final QuestionnaireAnswers questionnaireAnswers;
 
-    AchievementApplication(AchievementCode achievementCode, ProposedOutcome proposedOutcome) {
+    AchievementApplication(AchievementCode achievementCode, ProposedOutcome proposedOutcome,
+            QuestionnaireAnswers questionnaireAnswers) {
         this.achievementCode = achievementCode;
         this.proposedOutcome = proposedOutcome;
+        this.questionnaireAnswers = questionnaireAnswers;
     }
 
     boolean areAchievementsEqual(AchievementApplication application) {
@@ -45,9 +48,9 @@ class AchievementApplication {
         return new ProposedOutcomeUpdated(id, this.proposedOutcome);
     }
 
-    QuestionnaireAnswersUpdated updateAnswers(List<QuestionnaireAnswer> answers) {
-        this.answers = answers;
-        return new QuestionnaireAnswersUpdated(id, this.answers);
+    AnswersUpdated updateAnswers(List<Pair<QuestionId, String>> answers) {
+        questionnaireAnswers.updateAnswers(answers);
+        return new AnswersUpdated(id, questionnaireAnswers.getAnswers());
     }
     
 
@@ -61,6 +64,6 @@ class AchievementApplication {
     }
 
     boolean isApplicationFilled() {
-        return answers.stream().allMatch(QuestionnaireAnswer::isAnswerFilled) && proposedOutcome.isFilled();
+        return questionnaireAnswers.areAnswersFilled() && proposedOutcome.isFilled();
     }
 }

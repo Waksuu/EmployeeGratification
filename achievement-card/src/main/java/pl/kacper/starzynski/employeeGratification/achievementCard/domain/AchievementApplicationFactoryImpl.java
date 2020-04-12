@@ -12,11 +12,12 @@ class AchievementApplicationFactoryImpl implements AchievementApplicationFactory
 
     @Override
     public AchievementApplication create(AchievementCode achievementCode, ProposedOutcome proposedOutcome,
-            AchievementConfigurationId configId, AchievementConfigurationService achievementConfigurationService) {
+            QuestionnaireAnswers questionnaireAnswers, AchievementConfigurationId configId,
+            AchievementConfigurationService achievementConfigurationService) {
         if (achievementConfigurationService.isProposedOutcomeInvalid(achievementCode, proposedOutcome, configId)) {
             throw new AchievementException();
         }
 
-        return new AchievementApplication(achievementCode, proposedOutcome);
+        return new AchievementApplication(achievementCode, proposedOutcome, questionnaireAnswers);
     }
 }

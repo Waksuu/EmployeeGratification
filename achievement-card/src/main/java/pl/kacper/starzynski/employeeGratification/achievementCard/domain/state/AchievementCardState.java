@@ -2,8 +2,8 @@ package pl.kacper.starzynski.employeeGratification.achievementCard.domain.state;
 
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationApplied;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationRemoved;
+import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AnswersUpdated;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.ProposedOutcomeUpdated;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.QuestionnaireAnswersUpdated;
 
 import java.util.function.Supplier;
 
@@ -20,5 +20,5 @@ public interface AchievementCardState {
 
     ProposedOutcomeUpdated updateProposedOutcome(Supplier<ProposedOutcomeUpdated> supplier);
 
-    QuestionnaireAnswersUpdated updateQuestionnaireAnswers(Supplier<QuestionnaireAnswersUpdated> supplier);
+    AnswersUpdated updateQuestionnaireAnswers(Supplier<AnswersUpdated> supplier);
 }

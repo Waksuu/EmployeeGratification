@@ -3,8 +3,8 @@ package pl.kacper.starzynski.employeeGratification.achievementCard.domain.state;
 import org.springframework.data.annotation.TypeAlias;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationApplied;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationRemoved;
+import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AnswersUpdated;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.ProposedOutcomeUpdated;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.QuestionnaireAnswersUpdated;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementException;
 
 import java.util.function.Supplier;
@@ -42,7 +42,7 @@ class PublishedAchievementCardState implements AchievementCardState {
     }
 
     @Override
-    public QuestionnaireAnswersUpdated updateQuestionnaireAnswers(Supplier<QuestionnaireAnswersUpdated> supplier) {
+    public AnswersUpdated updateQuestionnaireAnswers(Supplier<AnswersUpdated> supplier) {
         throw new AchievementException();
     }
 }

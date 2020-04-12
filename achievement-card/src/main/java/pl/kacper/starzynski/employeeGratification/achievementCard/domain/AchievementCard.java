@@ -1,13 +1,15 @@
 package pl.kacper.starzynski.employeeGratification.achievementCard.domain;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.util.Pair;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationApplied;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationRemoved;
+import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AnswersUpdated;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.ProposedOutcomeUpdated;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.QuestionnaireAnswersUpdated;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.externalPorts.AchievementConfigurationService;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementApplicationId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementCardId;
+import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.QuestionId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.state.AchievementCardState;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.state.DraftAchievementCardState;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
@@ -35,10 +37,11 @@ public class AchievementCard {
     }
 
     public AchievementApplicationApplied applyForAchievement(AchievementCode achievementCode, ProposedOutcome proposedOutcome,
-            AchievementConfigurationService achievementConfigurationService, AchievementApplicationFactory achievementApplicationFactory) {
+            QuestionnaireAnswers questionnaireAnswers, AchievementConfigurationService achievementConfigurationService,
+            AchievementApplicationFactory achievementApplicationFactory) {
         return state.applyForAchievement(() -> {
-            var application = achievementApplicationFactory.create(achievementCode, proposedOutcome, configId,
-                    achievementConfigurationService);
+            var application = achievementApplicationFactory.create(achievementCode, proposedOutcome, questionnaireAnswers,
+                    configId, achievementConfigurationService);
 
             if (!application.isAchievementAvailableInEvaluationProcess(configId, achievementConfigurationService)) {
                 throw new AchievementException();
@@ -79,8 +82,7 @@ public class AchievementCard {
         });
     }
 
-    public QuestionnaireAnswersUpdated updateQuestionnaireAnswers(AchievementApplicationId achievementApplicationId,
-            List<QuestionnaireAnswer> answers) {
+    public AnswersUpdated updateQuestionnaireAnswers(AchievementApplicationId achievementApplicationId, List<Pair<QuestionId, String>> answers) {
         return this.state.updateQuestionnaireAnswers(() -> {
             var application = getAchievementApplication(achievementApplicationId);
             return application.updateAnswers(answers);
