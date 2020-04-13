@@ -25,7 +25,8 @@ public class AchievementCard {
     private final AchievementConfigurationId configId;
     private AchievementCardState state;
 
-    public AchievementCard(AchievementCardId id, List<AchievementApplication> requestedApplications, AchievementConfigurationId configId) {
+    public AchievementCard(AchievementCardId id, List<AchievementApplication> requestedApplications,
+            AchievementConfigurationId configId) {
         this.id = id;
         this.requestedApplications = requestedApplications;
         this.configId = configId;
@@ -33,11 +34,11 @@ public class AchievementCard {
     }
 
     public AchievementApplicationApplied applyForAchievement(AchievementCode achievementCode, ProposedOutcome proposedOutcome,
-            QuestionnaireAnswers questionnaireAnswers, AchievementConfigurationService achievementConfigurationService,
+            AchievementConfigurationService achievementConfigurationService,
             AchievementApplicationFactory achievementApplicationFactory) {
         return state.applyForAchievement(() -> {
-            var application = achievementApplicationFactory.create(achievementCode, proposedOutcome, questionnaireAnswers,
-                    configId, achievementConfigurationService);
+            var application = achievementApplicationFactory.create(achievementCode, proposedOutcome, configId,
+                    achievementConfigurationService);
 
             if (!application.isAchievementAvailableInEvaluationProcess(configId, achievementConfigurationService)) {
                 throw new AchievementException();

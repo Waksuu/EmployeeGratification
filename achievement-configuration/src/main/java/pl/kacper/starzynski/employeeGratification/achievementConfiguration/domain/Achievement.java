@@ -1,4 +1,4 @@
-package pl.kacper.starzynski.employeeGratification.achievement.domain;
+package pl.kacper.starzynski.employeeGratification.achievementConfiguration.domain;
 
 import com.mongodb.annotations.Immutable;
 import lombok.AllArgsConstructor;
@@ -13,15 +13,19 @@ import java.util.List;
 @Immutable
 @AllArgsConstructor
 @EqualsAndHashCode
-public abstract class Achievement {
+abstract class Achievement {
     @Id
     private final AchievementCode achievementCode;
     private final List<QuestionId> questionIds;
 
-    public abstract boolean isProposedOutcomeValid(ProposedOutcome proposedOutcome);
-    public abstract boolean canBeAppliedForMultipleTimes();
+    abstract boolean isProposedOutcomeValid(ProposedOutcome proposedOutcome);
+    abstract boolean canBeAppliedForMultipleTimes();
 
-    public List<QuestionId> getQuestionIds() {
+    boolean isEqual(AchievementCode achievementCode) {
+        return this.achievementCode.equals(achievementCode);
+    }
+
+    List<QuestionId> getQuestionIds() {
         return questionIds;
     }
 }

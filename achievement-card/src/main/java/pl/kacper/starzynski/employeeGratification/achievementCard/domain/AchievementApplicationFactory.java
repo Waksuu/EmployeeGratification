@@ -7,6 +7,5 @@ import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 
 public interface AchievementApplicationFactory {
     AchievementApplication create(AchievementCode achievementCode, ProposedOutcome proposedOutcome,
-            QuestionnaireAnswers questionnaireAnswers, AchievementConfigurationId configId,
-            AchievementConfigurationService achievementConfigurationService);
+            AchievementConfigurationId configId, AchievementConfigurationService achievementConfigurationService);
 }

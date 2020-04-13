@@ -1,4 +1,4 @@
-package pl.kacper.starzynski.employeeGratification.achievement.domain;
+package pl.kacper.starzynski.employeeGratification.achievementConfiguration.domain;
 
 import com.mongodb.annotations.Immutable;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
 class AchievementOption {
     private final String achievementOption;
 
-    public boolean isEqualTo(ProposedOutcome proposedOutcome) {
+    boolean isEqualTo(ProposedOutcome proposedOutcome) {
         return proposedOutcome.isEqualTo(achievementOption);
     }
 }
