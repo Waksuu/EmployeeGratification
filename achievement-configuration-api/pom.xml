@@ -9,8 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>achievement-configuration</artifactId>
-
+    <artifactId>achievement-configuration-api</artifactId>
     <dependencies>
         <dependency>
             <groupId>pl.kacper.starzynski.employeeGratification</groupId>
@@ -18,18 +17,7 @@
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>pl.kacper.starzynski.employeeGratification</groupId>
-            <artifactId>achievement-card</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>pl.kacper.starzynski.employeeGratification</groupId>
-            <artifactId>achievement-configuration-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
+
 
 </project>

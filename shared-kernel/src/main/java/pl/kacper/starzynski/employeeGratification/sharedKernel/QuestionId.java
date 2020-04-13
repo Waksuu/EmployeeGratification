@@ -1,4 +1,4 @@
-package pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities;
+package pl.kacper.starzynski.employeeGratification.sharedKernel;
 
 import com.mongodb.annotations.Immutable;
 import lombok.AllArgsConstructor;
@@ -11,6 +11,6 @@ import java.util.UUID;
 @Immutable
 @AllArgsConstructor
 @EqualsAndHashCode
-public class QuestionnaireId {
-    private final UUID questionnaireId;
+public class QuestionId {
+    private final UUID questionId;
 }

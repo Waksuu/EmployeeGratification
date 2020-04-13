@@ -7,7 +7,6 @@ import pl.kacper.starzynski.employeeGratification.achievementCard.domain.*;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.externalPorts.AchievementConfigurationService;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementApplicationId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementCardId;
-import pl.kacper.starzynski.employeeGratification.achievementCard.readmodel.AchievementApplicationDTO;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementException;
 
 @Service
@@ -21,8 +20,8 @@ public class AchievementCardService {
 
     public void applyForAchievement(AchievementCardId achievementCardId, AchievementApplicationDTO dto) {
         var achievementCard = getAchievementCard(achievementCardId);
-        // TODO: ???
-        QuestionnaireAnswers questionnaireAnswers = questionnaireAnswersFactory.createQuestionnaireAnswersForAchievement(dto.getAchievementCode());
+        QuestionnaireAnswers questionnaireAnswers = questionnaireAnswersFactory.createQuestionnaireAnswersForAchievement(
+                dto.getAchievementCode());
         achievementCard.applyForAchievement(dto.getAchievementCode(), dto.getProposedOutcome(), questionnaireAnswers,
                 achievementConfigurationService, achievementApplicationFactory);
     }

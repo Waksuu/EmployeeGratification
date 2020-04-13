@@ -2,11 +2,11 @@ package pl.kacper.starzynski.employeeGratification.achievementCard.webui;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import pl.kacper.starzynski.employeeGratification.achievementCard.application.AchievementApplicationDTO;
 import pl.kacper.starzynski.employeeGratification.achievementCard.application.AchievementCardService;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.AchievementCard;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementCardId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.infrastructure.mongo.AchievementCardMongoRepository;
-import pl.kacper.starzynski.employeeGratification.achievementCard.readmodel.AchievementApplicationDTO;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementConfigurationId;
 
 import java.util.Collections;

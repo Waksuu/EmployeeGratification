@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.springframework.data.util.Pair;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.QuestionId;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementException;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.QuestionId;
 
 import java.util.List;
 

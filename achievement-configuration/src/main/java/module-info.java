@@ -7,4 +7,5 @@ module pl.kacper.starzynski.employeeGratification.achievementConfiguration {
     requires spring.data.mongodb;
     requires spring.context;
     requires pl.kacper.starzynski.employeeGratification.achievementCard;
+    requires pl.kacper.starzynski.employeeGratification.achievementConfigurationApi;
 }

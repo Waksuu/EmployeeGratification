@@ -3,7 +3,7 @@ package pl.kacper.starzynski.employeeGratification.achievementCard.domain;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.QuestionId;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.QuestionId;
 
 @RequiredArgsConstructor(staticName = "of")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)

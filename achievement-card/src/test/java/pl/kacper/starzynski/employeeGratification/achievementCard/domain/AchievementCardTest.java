@@ -7,7 +7,7 @@
 //import org.mockito.junit.jupiter.MockitoExtension;
 //import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationApplied;
 //import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementApplicationId;
-//import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.QuestionId;
+//import pl.kacper.starzynski.employeeGratification.sharedKernel.QuestionId;
 //import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.QuestionnaireId;
 //import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
 //import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementException;

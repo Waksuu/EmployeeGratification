@@ -9,13 +9,9 @@ import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.externalPorts.AchievementConfigurationService;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementApplicationId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.AchievementCardId;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.QuestionId;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.state.AchievementCardState;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.state.DraftAchievementCardState;
-import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
-import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementConfigurationId;
-import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementException;
-import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.*;
 
 import java.util.List;
 

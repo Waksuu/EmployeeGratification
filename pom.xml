@@ -27,6 +27,7 @@
         <module>shared-kernel</module>
         <module>achievement-configuration</module>
         <module>bootloader</module>
+        <module>achievement-configuration-api</module>
     </modules>
 
     <dependencies>

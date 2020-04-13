@@ -1,11 +1,11 @@
-package pl.kacper.starzynski.employeeGratification.achievementCard.readmodel;
+package pl.kacper.starzynski.employeeGratification.achievementCard.application;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.data.util.Pair;
-import pl.kacper.starzynski.employeeGratification.achievementCard.domain.identities.QuestionId;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.AchievementCode;
 import pl.kacper.starzynski.employeeGratification.sharedKernel.ProposedOutcome;
+import pl.kacper.starzynski.employeeGratification.sharedKernel.QuestionId;
 
 import java.io.Serializable;
 import java.util.List;

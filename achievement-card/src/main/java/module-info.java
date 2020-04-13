@@ -10,4 +10,5 @@ module pl.kacper.starzynski.employeeGratification.achievementCard {
     requires pl.kacper.starzynski.employeeGratification.sharedKernel;
     requires spring.context;
     requires spring.core;
+    requires pl.kacper.starzynski.employeeGratification.achievementConfigurationApi;
 }
