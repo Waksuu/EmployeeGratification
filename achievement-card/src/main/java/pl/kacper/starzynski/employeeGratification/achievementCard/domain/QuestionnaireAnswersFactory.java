@@ -10,8 +10,6 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-// TODO: Domena ma dostęp do API???
-
 @RequiredArgsConstructor
 @Component
 public class QuestionnaireAnswersFactory {
