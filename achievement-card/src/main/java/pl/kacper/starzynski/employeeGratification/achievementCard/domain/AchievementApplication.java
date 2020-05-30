@@ -3,6 +3,7 @@ package pl.kacper.starzynski.employeeGratification.achievementCard.domain;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.util.Pair;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AnswersUpdated;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.ProposedOutcomeUpdated;
@@ -18,16 +19,26 @@ class AchievementApplication {
     @Getter
     @EqualsAndHashCode.Include
     //TODO: Think of some natural identity
-    private final AchievementApplicationId id = new AchievementApplicationId();
+    private final AchievementApplicationId id;
     private final AchievementCode achievementCode;
     private ProposedOutcome proposedOutcome;
     private final QuestionnaireAnswers questionnaireAnswers;
 
     AchievementApplication(AchievementCode achievementCode, ProposedOutcome proposedOutcome,
             QuestionnaireAnswers questionnaireAnswers) {
+        id = new AchievementApplicationId();
         this.achievementCode = achievementCode;
         this.proposedOutcome = proposedOutcome;
         this.questionnaireAnswers = questionnaireAnswers;
+    }
+
+    @PersistenceConstructor
+    private AchievementApplication(AchievementApplicationId id, AchievementCode achievementCode, ProposedOutcome proposedOutcome,
+            QuestionnaireAnswers questionnaireAnswers) {
+        this.achievementCode = achievementCode;
+        this.proposedOutcome = proposedOutcome;
+        this.questionnaireAnswers = questionnaireAnswers;
+        this.id = id;
     }
 
     boolean areAchievementsEqual(AchievementApplication application) {

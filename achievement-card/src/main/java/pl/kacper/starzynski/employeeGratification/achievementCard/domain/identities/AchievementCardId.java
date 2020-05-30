@@ -4,6 +4,7 @@ import com.mongodb.annotations.Immutable;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.UUID;
 
@@ -11,6 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 @EqualsAndHashCode
+@ToString
 public class AchievementCardId {
     private final UUID id;
 }

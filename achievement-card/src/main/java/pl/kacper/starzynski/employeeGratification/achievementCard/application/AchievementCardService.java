@@ -23,12 +23,14 @@ public class AchievementCardService {
         var achievementCard = getAchievementCard(achievementCardId);
         achievementCard.applyForAchievement(dto.getAchievementCode(), dto.getProposedOutcome(), achievementConfigurationService,
                 achievementApplicationFactory);
+        achievementCardRepository.save(achievementCard);
     }
 
     public void removeAchievementApplication(AchievementCardId achievementCardId,
             AchievementApplicationId achievementApplicationId) {
         var achievementCard = getAchievementCard(achievementCardId);
         achievementCard.removeAchievementApplication(achievementApplicationId);
+        achievementCardRepository.save(achievementCard);
     }
 
     public void updateAchievementApplication(AchievementCardId achievementCardId,
@@ -37,11 +39,13 @@ public class AchievementCardService {
         achievementCard.updateProposedOutcome(achievementApplicationId, dto.getProposedOutcome(),
                 achievementConfigurationService);
         achievementCard.updateQuestionnaireAnswers(achievementApplicationId, dto.getAnswers());
+        achievementCardRepository.save(achievementCard);
     }
 
     public void markAsReadToPromoMeeting(AchievementCardId achievementCardId) {
         var achievementCard = getAchievementCard(achievementCardId);
         achievementCard.moveToPromotionMeeting();
+        achievementCardRepository.save(achievementCard);
     }
 
     private AchievementCard getAchievementCard(AchievementCardId achievementCardId) {

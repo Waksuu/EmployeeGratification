@@ -3,6 +3,7 @@ package pl.kacper.starzynski.employeeGratification.achievementCard.domain.identi
 import com.mongodb.annotations.Immutable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import org.springframework.data.annotation.PersistenceConstructor;
 
 import java.util.UUID;
 
@@ -10,5 +11,14 @@ import java.util.UUID;
 @Getter
 @EqualsAndHashCode
 public class AchievementApplicationId {
-    private final UUID id = UUID.randomUUID();
+    private final UUID id;
+
+    public AchievementApplicationId() {
+        id = UUID.randomUUID();
+    }
+
+    @PersistenceConstructor
+    private AchievementApplicationId(UUID id) {
+        this.id = id;
+    }
 }

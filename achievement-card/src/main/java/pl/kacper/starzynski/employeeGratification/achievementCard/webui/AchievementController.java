@@ -28,6 +28,6 @@ public class AchievementController {
     @GetMapping(path = "/test")
     void get() {
         var a = achievementCardRepository.save(new AchievementCard(new AchievementCardId(UUID.randomUUID()), Collections.emptyList(), new AchievementConfigurationId(UUID.randomUUID())));
-        System.out.print(a.toString());
+        System.out.print(a.getId().toString());
     }
 }

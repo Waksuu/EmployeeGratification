@@ -1,6 +1,8 @@
 package pl.kacper.starzynski.employeeGratification.achievementCard.domain;
 
+import lombok.Getter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
 import org.springframework.data.util.Pair;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationApplied;
 import pl.kacper.starzynski.employeeGratification.achievementCard.domain.events.AchievementApplicationRemoved;
@@ -17,10 +19,14 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-//TODO: Add version
 public class AchievementCard {
     @Id
+    @Getter
     private final AchievementCardId id;
+
+    @Version
+    private Long version;
+
     private final List<AchievementApplication> requestedApplications;
     private final AchievementConfigurationId configId;
     private AchievementCardState state;
