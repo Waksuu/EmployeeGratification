@@ -18,16 +18,14 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
-        <java.version>11</java.version>
+        <JAVA.VERSION>11</JAVA.VERSION>
         <lombok.version>1.18.12</lombok.version>
     </properties>
 
     <modules>
-        <module>achievement-card</module>
+        <module>achievement</module>
         <module>shared-kernel</module>
-        <module>achievement-configuration</module>
         <module>bootloader</module>
-        <module>achievement-configuration-api</module>
     </modules>
 
     <dependencies>
