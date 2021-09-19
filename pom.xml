@@ -18,7 +18,7 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
-        <JAVA.VERSION>11</JAVA.VERSION>
+        <JAVA.VERSION>17</JAVA.VERSION>
         <maven.compiler.target>${JAVA.VERSION}</maven.compiler.target>
         <maven.compiler.source>${JAVA.VERSION}</maven.compiler.source>
         <lombok.version>1.18.20</lombok.version>
