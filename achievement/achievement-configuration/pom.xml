@@ -24,11 +24,6 @@
             <groupId>pl.kacper.starzynski.employee-gratification</groupId>
             <artifactId>achievement-configuration-api</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
     </dependencies>
 
 </project>

@@ -36,19 +36,13 @@
             <!-- Project dependencies -->
             <dependency>
                 <groupId>pl.kacper.starzynski.employee-gratification</groupId>
-                <artifactId>shared-kernel</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>pl.kacper.starzynski.employee-gratification</groupId>
                 <artifactId>bootloader</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>pl.kacper.starzynski.employee-gratification</groupId>
-                <artifactId>achievement</artifactId>
+                <artifactId>shared-kernel</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
