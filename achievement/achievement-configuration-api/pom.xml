@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>achievement</artifactId>
-        <groupId>pl.kacper.starzynski.employeeGratification</groupId>
+        <groupId>pl.kacper.starzynski.employee-gratification</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -12,7 +12,7 @@
     <artifactId>achievement-configuration-api</artifactId>
     <dependencies>
         <dependency>
-            <groupId>pl.kacper.starzynski.employeeGratification</groupId>
+            <groupId>pl.kacper.starzynski.employee-gratification</groupId>
             <artifactId>shared-kernel</artifactId>
         </dependency>
     </dependencies>

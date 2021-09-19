@@ -11,10 +11,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>pl.kacper.starzynski.employeeGratification</groupId>
-    <artifactId>EmployeeGratification</artifactId>
+    <groupId>pl.kacper.starzynski.employee-gratification</groupId>
+    <artifactId>employee-gratification</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>EmployeeGratification</name>
+    <name>employee-gratification</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -35,37 +35,37 @@
         <dependencies>
             <!-- Project dependencies -->
             <dependency>
-                <groupId>pl.kacper.starzynski.employeeGratification</groupId>
+                <groupId>pl.kacper.starzynski.employee-gratification</groupId>
                 <artifactId>shared-kernel</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>pl.kacper.starzynski.employeeGratification</groupId>
+                <groupId>pl.kacper.starzynski.employee-gratification</groupId>
                 <artifactId>bootloader</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>pl.kacper.starzynski.employeeGratification</groupId>
+                <groupId>pl.kacper.starzynski.employee-gratification</groupId>
                 <artifactId>achievement</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>pl.kacper.starzynski.employeeGratification</groupId>
+                <groupId>pl.kacper.starzynski.employee-gratification</groupId>
                 <artifactId>achievement-card</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>pl.kacper.starzynski.employeeGratification</groupId>
+                <groupId>pl.kacper.starzynski.employee-gratification</groupId>
                 <artifactId>achievement-configuration</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>pl.kacper.starzynski.employeeGratification</groupId>
+                <groupId>pl.kacper.starzynski.employee-gratification</groupId>
                 <artifactId>achievement-configuration-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -76,11 +76,13 @@
                 <artifactId>spring-boot-starter-data-mongodb</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
