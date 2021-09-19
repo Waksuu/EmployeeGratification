@@ -15,20 +15,19 @@
         <dependency>
             <groupId>pl.kacper.starzynski.employeeGratification</groupId>
             <artifactId>shared-kernel</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>pl.kacper.starzynski.employeeGratification</groupId>
             <artifactId>achievement-card</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>pl.kacper.starzynski.employeeGratification</groupId>
             <artifactId>achievement-configuration-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 
