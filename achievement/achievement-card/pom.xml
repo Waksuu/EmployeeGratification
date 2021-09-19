@@ -12,6 +12,7 @@
     <artifactId>achievement-card</artifactId>
 
     <dependencies>
+        <!-- Project dependencies -->
         <dependency>
             <groupId>pl.kacper.starzynski.employee-gratification</groupId>
             <artifactId>shared-kernel</artifactId>
@@ -21,9 +22,15 @@
             <artifactId>achievement-configuration-api</artifactId>
         </dependency>
 
+        <!-- Third party dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
 
         <dependency>
